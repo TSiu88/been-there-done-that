@@ -152,6 +152,13 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 <!-- <img src="./public/component-diagram-wireframe.png"> -->
 
+<details>
+  <summary>Click to expand to view Initial Wireframes</summary>
+  <img src="./public/initial-wireframe2.png">
+
+  <img src="./public/initial-wireframe1.png">
+</details>
+
 ### Database Structure
 
 <!-- <img src="./public/data-structure.png"> -->
