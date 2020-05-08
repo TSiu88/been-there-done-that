@@ -5,4 +5,4 @@
 
 - 11:30am - Plan Mockup in Figma, Plan workflow in Trello
 - 12:30pm - Work on Component Diagram
-- 2:30pm - Lunch, Work on Component Diagram
+- 2:30pm - Lunch, Work on Component Diagram, Research how mapbox info appears for ideas on how components should be laid out/examples with React
