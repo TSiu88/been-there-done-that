@@ -2,9 +2,11 @@
 ### By: Tiffany Siu, Submitted 5/5/2020
 
 ## Description
+
 Been There, Done That is a website that tracks your personal footprint of where you've been before by being able to tag and add private notes to a place of interest on a map.
 
 ## Use Case
+
 The purpose of this project is to help people keep track of places they’ve been and things that they’ve seen.  Whether it’s as simple as the restaurants they tried in the area, to major landmarks from exotic trips, it would allow people to tag a place with when it occurred and leave a note for themselves.
 
 Users are anyone who would like help remembering where they’ve been from world travels to local businesses.
@@ -16,12 +18,14 @@ The product would allow all places to be tagged from businesses to points of int
 The product will only allow editing, deleting, and viewing tagged places  from the person who owns it and only viewable if shared by the person
 
 ## Minimum Viable Product
+
  * This application will be a web application
  * It will use a Places of Interest API for place data (mapbox)
  * Data will persist in a firebase database
  * Have user authentication/authorization so users can log in and be only able to see their own data
 
 ### Tools for MVP
+
  * VisualStudio Code
  * React front end 
  * Eslint, Jest for testing
@@ -45,6 +49,7 @@ The product will only allow editing, deleting, and viewing tagged places  from t
  * Data Visualization of overall areas places tagged in the app with D3.js, darker when more tags in the area
 
 ### Tools for Additional Features
+
  * Use mapbox to create custom markers and show additional info
  * Use free share buttons to share info to social media like sharethis, niftybuttons, addthis, addtoany, etc.
  * Use paid SMS service to send texts like TextMagic, SimpleTexting, Salesmsg, or Twilio

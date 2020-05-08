@@ -3,22 +3,30 @@
 </h1>
 <h4 align="center"><em>Track your personal footprint of places you've been, Initialized 05.08.2020</em>
 </h4>
-<h4 align="center"><em>By _**Tiffany Siu</em></h4>
+<h4 align="center"><em>By: Tiffany Siu</em></h4>
 
 <!-- [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) -->
 <!-- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) -->
-<!-- [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-![LastCommit](https://img.shields.io/github/last-commit/TSiu88/been-there-done-that)
-![GitHub contributors](https://img.shields.io/github/contributors/tsiu88/been-there-done-that)
-![GitHub issues](https://img.shields.io/github/issues/tsiu88/been-there-done-that)
-[![MIT license](https://img.shields.io/badge/License-MIT-orange.svg)](https://lbesson.mit-license.org/) -->
 
 <p align="center">
-  <a href="https://www.repostatus.org/#wip"><img alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." src="https://www.repostatus.org/badges/latest/wip.svg"></a>
-  <a href="#/been-there-done-that/commits/master"><img alt="LastCommit" src="https://img.shields.io/github/last-commit/TSiu88/been-there-done-that"></a>
-  <a href="#/been-there-done-that/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/tsiu88/been-there-done-that"></a>
-  <a href="#/been-there-done-that/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/tsiu88/been-there-done-that"></a>
-  <a href="https://lbesson.mit-license.org/"><img alt="MIT license" src="https://img.shields.io/badge/License-MIT-orange.svg"></a>
+  <a href="https://www.repostatus.org/#wip">
+    <img alt="Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public." src="https://www.repostatus.org/badges/latest/wip.svg">
+  </a>
+  <a href="#/been-there-done-that/commits/master">
+    <img alt="LastCommit" src="https://img.shields.io/github/last-commit/TSiu88/been-there-done-that">
+  </a>
+  <a href="#/been-there-done-that/graphs/contributors">
+    <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/tsiu88/been-there-done-that">
+  </a>
+  <a href="#/been-there-done-that/issues">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/tsiu88/been-there-done-that">
+  </a>
+  <a href="https://lbesson.mit-license.org/">
+    <img alt="MIT license" src="https://img.shields.io/badge/License-MIT-orange.svg">
+  </a>
+  <a href="https://linkedin.com/in/tiffanysiu88">
+    <img src="https://img.shields.io/badge/-LinkedIn-linkedin.svg?style=flat&logo=linkedin&colorB=0077b5">
+  </a>
 </p>
 
 
