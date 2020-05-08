@@ -150,12 +150,15 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 ### Component Diagram/Wireframe
 
-<!-- <img src="./public/component-diagram-wireframe.png"> -->
+<img src="./public/component-diagram-wireframe.png">
 
 <details>
-  <summary>Click to expand to view Initial Wireframes</summary>
-  <img src="./public/initial-wireframe2.png">
+  <summary>Click to expand to view Initial Wireframes/Prototypes</summary>
 
+  Wireframe of Home Page When not Signed
+  <img alt="Wireframe on home page not signed in" src="./public/initial-wireframe2.png">
+
+  Wireframe of Search and map section
   <img src="./public/initial-wireframe1.png">
 </details>
 
