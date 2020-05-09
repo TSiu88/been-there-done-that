@@ -62,7 +62,7 @@ Been There, Done That is a web application that tracks your personal footprint o
 The purpose of this project is to help people keep track of places they’ve been and things that they’ve seen.  Whether it’s as simple as the restaurants they tried in the area, to major landmarks from exotic trips, it would allow people to tag a place with when it occurred and leave a note for themselves as a reminder of whatever information they want to know about a place.
 
 ### Notable Features
-<!-- _features that make project stand out_ -->
+This project is expected to use mapbox API to display a map with custom markers and popups that can be added or removed from a personal list of tagged places.
 
 ### Known Bugs
 
