@@ -164,7 +164,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 ### Database Structure
 
-<!-- <img src="./public/data-structure.png"> -->
+<img src="./public/data-structure.png">
 
 ### Specifications
 
