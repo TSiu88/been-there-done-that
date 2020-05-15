@@ -11,6 +11,8 @@ class TagControl extends React.Component {
     };
   }
 
+  
+
   setVisibility = () => {
     if(TagListVisible){
       currentlyVisibleComponent = <TagList />

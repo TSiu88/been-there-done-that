@@ -14,3 +14,6 @@
 
 - 8:50am - Update Component Diagram from last week's suggestions
 - 11:30am - Thought component diagram needed a search control for the search bar and list to be in different sections so started modifying but then realized mapbox might take care of that so researched mapbox searchs
+- 12:10pm - Reassess and refocus on workflow of what to code first in Trello
+- 12:40pm - Lunch
+- 2:00pm - Reconsider components in diagram
