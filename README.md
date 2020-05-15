@@ -151,7 +151,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 ### Component Diagram/Wireframe
 
-<img src="./public/component-diagram-v2.png">
+<img src="./public/component-diagram-v3.png">
 
 <details>
   <summary>Click to expand to view Initial Wireframes/Prototypes</summary>

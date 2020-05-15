@@ -7,14 +7,18 @@ class TagControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+      tagListVisible: false
     };
   }
 
-  
+  handleClick = () => {
+    this.setState(prevState => ({
+      tagListVisible: !prevState.tagListVisible
+    }));
+  }
 
   setVisibility = () => {
-    if(TagListVisible){
+    if(tagListVisible){
       currentlyVisibleComponent = <TagList />
     } else {
       currentlyVisibleComponent = <MapSearch />
