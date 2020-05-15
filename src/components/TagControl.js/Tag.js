@@ -9,15 +9,15 @@ function Tag(props){
       <h4>{props.address} | {props.coordinates}</h4>
       <p>{props.description}</p>
       <p>Note: {props.personalNote}</p>
-      <button className="btn btn-secondary" onClick = {() => {props.onEditClick(props.id)}}>Edit</button>
-      <button className="btn btn-secondary" onClick = {() => {props.onDeleteClick(props.id)}}>Delete</button>
+      <button className="btn btn-secondary" onClick = {() => {props.whenEditClick(props.id)}}>Edit</button>
+      <button className="btn btn-secondary" onClick = {() => {props.whenDeleteClick(props.id)}}>Delete</button>
     </React.Fragment>
   );
 }
 
 Tag.propTypes = {
-  onEditClick: PropTypes.func,
-  onDeleteClick: PropTypes.func,
+  whenEditClick: PropTypes.func,
+  whenDeleteClick: PropTypes.func,
   tagStatus: PropTypes.bool,
   dateCreated: PropTypes.object,
   nickName: PropTypes.string,
