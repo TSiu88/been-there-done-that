@@ -13,3 +13,4 @@
 ## Friday 5/15/2020
 
 - 8:50am - Update Component Diagram from last week's suggestions
+- 11:30am - Thought component diagram needed a search control for the search bar and list to be in different sections so started modifying but then realized mapbox might take care of that so researched mapbox searchs
