@@ -17,3 +17,4 @@
 - 12:10pm - Reassess and refocus on workflow of what to code first in Trello
 - 12:40pm - Lunch
 - 2:00pm - Reconsider components in diagram
+- 2:40pm - Rearrange component diagram more

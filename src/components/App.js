@@ -6,10 +6,10 @@ import ScreenControl from './ScreenControl'
 function App() {
   return (
     <React.Fragment>
-      <Router>
+      {/* <Router> */}
         <Header />
         <ScreenControl />
-      </Router>
+      {/* </Router> */}
     </React.Fragment>
   );
 }
