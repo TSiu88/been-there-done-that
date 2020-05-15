@@ -106,11 +106,11 @@ _There are currently no known bugs in this program_
 
 #### Planned with Future Product
 * _Custom markers in mapbox_
-* _Material UI for more fancy styling_
+* _Semantic UI for more fancy styling_
 * _Share buttons to connect with social media_
 * _Share a tagged place with note/snapshot using a paid SMS service_
-* _D3.js for data visualization_
-* _Calendar integration_
+* _D3.js for data visualization of density of tags/notes in states/counties_
+* _Calendar integration showing dates tags/notes added_
 
 ## Scope
 
@@ -129,6 +129,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 * It will use a Places of Interest API for place data (mapbox)
 * Data will persist in a firebase database
 * Have user authentication/authorization so users can log in and be only able to see their own data
+* Users will be able to tag a places as visited or add a private note about a place that are visible only to themselves
 
 ### Future Product Roadmap
 
@@ -150,7 +151,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 ### Component Diagram/Wireframe
 
-<img src="./public/component-diagram-wireframe.png">
+<img src="./public/component-diagram-v2.png">
 
 <details>
   <summary>Click to expand to view Initial Wireframes/Prototypes</summary>

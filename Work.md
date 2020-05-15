@@ -9,3 +9,7 @@
 - 2:30pm -  Research how mapbox info appears for ideas on how components should be laid out/examples with React, Work on Component Diagram more
 - 3:30pm - Research mapbox markers and geocoding
 - 4:30pm - Work on Component Diagram more
+
+## Friday 5/15/2020
+
+- 8:50am - Update Component Diagram from last week's suggestions
