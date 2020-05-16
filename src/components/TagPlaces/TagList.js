@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const tags = [{}];
 
-function TagList(){
+function TagList(props){
   return(
     <React.Fragment>
       <hr />

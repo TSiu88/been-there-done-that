@@ -11,7 +11,7 @@ function Place(props){
   );
 }
 
-Place.PropTypes = {
+Place.propTypes = {
   whenTaggingClick: PropTypes.func,
   placeName: PropTypes.string,
   address: PropTypes.string

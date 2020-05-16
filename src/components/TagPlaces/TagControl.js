@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TagList from './TagList';
 import MapSearch from './MapSearch';
 import NewTagForm from './NewTagForm';
