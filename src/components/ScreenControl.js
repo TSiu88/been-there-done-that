@@ -1,9 +1,11 @@
 import React from 'react';
 import SplashPage from './SplashPage';
 import TagControl from './TagPlaces/TagControl';
+import PropTypes from 'prop-types';
 
 class ScreenControl extends React.Component {
 
+  
   constructor(props){
     super(props);
     this.state = {
@@ -20,7 +22,7 @@ class ScreenControl extends React.Component {
   }
 
   setVisibility = () => {
-    if(splashPageVisible){
+    if(this.state.splashPageVisible){
       currentlyVisibleComponent = <SplashPage />;
     } else {
       currentlyVisibleComponent = <TagControl />;
@@ -28,7 +30,7 @@ class ScreenControl extends React.Component {
   }
 
   render(){
-    let currentlyVisibleComponent = this.setVisibility();
+    let currentlyVisibleComponent = this.setVisibility;
     return(
       <React.Fragment>
         <h2>SCREEN CONTROL</h2>
@@ -37,6 +39,10 @@ class ScreenControl extends React.Component {
       </React.Fragment>
     );
   }
+}
+
+ScreenControl.propTypes = {
+  splashPageVisible: PropTypes.bool
 }
 
 export default ScreenControl;

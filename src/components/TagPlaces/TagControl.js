@@ -2,13 +2,16 @@ import React from 'react';
 import TagList from './TagList';
 import MapSearch from './MapSearch';
 import NewTagForm from './NewTagForm';
+import PropTypes from 'prop-types';
 
 class TagControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       tagListVisible: false,
-      mapSearchVisible: true
+      mapSearchVisible: true,
+      selectedPlace: null,
+      selectedTag: null
     };
   }
 
@@ -17,6 +20,14 @@ class TagControl extends React.Component {
       tagListVisible: !prevState.tagListVisible,
       mapSearchVisible: !prevState.mapSearchVisible
     }));
+  }
+
+  handleAddingNewTag = (newTag) => {
+    
+  }
+
+  handleChangingSelectedPlace = (id) => {
+
   }
 
   setVisibility = () => {
@@ -38,5 +49,9 @@ class TagControl extends React.Component {
     );
   }
 }
+
+TagControl.propTypes = {
+  tagListVisible: PropTypes.bool
+};
 
 export default TagControl;

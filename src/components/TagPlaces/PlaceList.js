@@ -21,7 +21,7 @@ function PlaceList(){
   );
 }
 
-PlaceList.PropTypes = {
+PlaceList.propTypes = {
   onTaggingClick: PropTypes.func
 }
 
