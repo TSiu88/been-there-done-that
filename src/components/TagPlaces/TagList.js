@@ -2,13 +2,13 @@ import React from 'react';
 import Tag from './Tag';
 import PropTypes from 'prop-types';
 
-const tags = [{}];
+const masterTags = [{}];
 
 function TagList(props){
   return(
     <React.Fragment>
       <hr />
-      {tags.map((tag) => {
+      {masterTags.map((tag) => {
         return <Tag
           tagStatus={tag.tagStatus}
           dateCreated={tag.dateCreated}
@@ -28,7 +28,7 @@ function TagList(props){
   );
 }
 
-TagList.PropTypes = {
+TagList.propTypes = {
   onEditClick: PropTypes.func,
   onDeleteClick: PropTypes.func
 }

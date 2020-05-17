@@ -1,7 +1,7 @@
 import React from 'react';
 import TagList from './TagList';
 import MapSearch from './MapSearch';
-import NewTagForm from './NewTagForm';
+//import NewTagForm from './NewTagForm';
 import PropTypes from 'prop-types';
 
 class TagControl extends React.Component {
@@ -31,10 +31,10 @@ class TagControl extends React.Component {
   }
 
   setVisibility = () => {
-    if(tagListVisible){
-      currentlyVisibleComponent = <TagList />
+    if(this.tagListVisible){
+      return <TagList />;
     } else {
-      currentlyVisibleComponent = <MapSearch />
+      return <MapSearch />;
     }
   }
 

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-// import { creteStore } from 'redux';
+// import { createStore } from 'redux';
 // import { Provider } from 'react-redux';
 
 ReactDOM.render(
