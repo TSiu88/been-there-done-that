@@ -2,15 +2,14 @@ import React from 'react';
 import Place from './Place';
 import PropTypes from 'prop-types';
 
-const places = [{}];
-
-function PlaceList(){
+function PlaceList(props){
   return(
     <React.Fragment>
       <hr />
-      {places.map((place) => {
+      {props.places.map((place) => {
         return <Place 
           whenTaggingClick={place.onTaggingClick}
+          whenClickPlace={place.onDetailsClick}
           placeName={place.placeName}
           address={place.address}
           id={place.id}
@@ -22,7 +21,9 @@ function PlaceList(){
 }
 
 PlaceList.propTypes = {
-  onTaggingClick: PropTypes.func
+  onTaggingClick: PropTypes.func,
+  onDetailsClick: PropTypes.func,
+  places: PropTypes.array 
 }
 
 export default PlaceList;

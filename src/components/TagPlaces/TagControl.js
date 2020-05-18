@@ -2,7 +2,9 @@ import React from 'react';
 import TagList from './TagList';
 import MapSearch from './MapSearch';
 import NewTagForm from './NewTagForm';
+import PlaceDetail from './PlaceDetails';
 import PropTypes from 'prop-types';
+import {v4} from 'uuid';
 
 class TagControl extends React.Component {
   constructor(props) {
@@ -12,10 +14,11 @@ class TagControl extends React.Component {
       tagListVisible: false,
       mapSearchVisible: true,
       selectedPlace: null,
+      placeToAdd: null,
       selectedTag: null,
       masterTagList: [
         {
-          id: 1,
+          id: v4(),
           tagStatus: true,
           nickName: "nick one",
           placeName: "place name",
@@ -26,7 +29,7 @@ class TagControl extends React.Component {
           dateCreated: Date.now()
         },
         {
-          id: 2,
+          id: v4(),
           tagStatus: true,
           nickName: "nick two",
           placeName: "place2 name",
@@ -39,7 +42,10 @@ class TagControl extends React.Component {
       ],
       masterPlaceList: [
         {
-          
+          id: 0,
+          placeName: "place0",
+          address: "000 Street",
+          coordinates: "xxx,yyy"
         }
       ]
     };
@@ -74,10 +80,16 @@ class TagControl extends React.Component {
   setVisibility = () => {
     if(this.state.tagListVisible){
       return <TagList tagList={this.state.masterTagList}/>;
+    } else if (this.state.selectedPlace != null){
+      return <PlaceDetail place = {this.state.selectedPlace} />
     } else if (this.state.addTagFormVisible){
       return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} />
     } else {
-      return <MapSearch />;
+      return <MapSearch 
+        placesList={this.state.masterPlaceList}
+        placeToAdd={this.handleAddingNewTag}
+        showPlaceDetails={this.handleChangingSelectedPlace}
+      />;
     }
   }
 

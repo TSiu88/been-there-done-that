@@ -8,6 +8,8 @@ function MapSearch(props){
       <h2>MAP SEARCH</h2>
       <PlaceList 
         onTaggingClick={props.placeToAdd}
+        onDetailsClick={props.showPlaceDetails}
+        places = {props.placesList}
       />
       {/* Map from API here */}
     </React.Fragment>
@@ -15,7 +17,9 @@ function MapSearch(props){
 }
 
 MapSearch.propTypes = {
-  placeToAdd: PropTypes.func
+  placeToAdd: PropTypes.func,
+  showPlaceDetails: PropTypes.func,
+  placesList: PropTypes.array
 }
 
 export default MapSearch;
