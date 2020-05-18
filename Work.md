@@ -18,3 +18,8 @@
 - 12:40pm - Lunch
 - 2:00pm - Reconsider components in diagram
 - 2:40pm - Rearrange component diagram more
+
+## Monday 5/18/2020
+
+- 8:45am - Update Trello, Review Component Diagram
+- 9:40am - Research mapbox and React examples and tutorials
