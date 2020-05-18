@@ -11,11 +11,35 @@ class TagControl extends React.Component {
       tagListVisible: false,
       mapSearchVisible: true,
       selectedPlace: null,
-      selectedTag: null
+      selectedTag: null,
+      masterTagList: [
+        {
+          id: 1,
+          tagStatus: true,
+          nickName: "nick one",
+          placeName: "place name",
+          description: "tester place desc",
+          address: "123 Street",
+          coordinates: "xxx,yyy",
+          personalNote: "testing testing",
+          dateCreated: Date.now()
+        },
+        {
+          id: 2,
+          tagStatus: true,
+          nickName: "nick two",
+          placeName: "place2 name",
+          description: "tester2 place desc",
+          address: "456 Street",
+          coordinates: "xxx,yyy",
+          personalNote: "testing2 testing2",
+          dateCreated: Date.now()
+        }
+      ]
     };
   }
 
-  handleClick = () => {
+  handleToggleListMap = () => {
     this.setState(prevState => ({
       tagListVisible: !prevState.tagListVisible,
       mapSearchVisible: !prevState.mapSearchVisible
@@ -31,8 +55,8 @@ class TagControl extends React.Component {
   }
 
   setVisibility = () => {
-    if(this.tagListVisible){
-      return <TagList />;
+    if(this.state.tagListVisible){
+      return <TagList tagList={this.state.masterTagList}/>;
     } else {
       return <MapSearch />;
     }
@@ -43,7 +67,7 @@ class TagControl extends React.Component {
     return(
       <React.Fragment>
         <h2>TAG CONTROL</h2>
-        <h4><span onClick={this.handleClick}>Tag List</span></h4>
+        <button onClick={this.handleToggleListMap}>Toggle</button>
         {currentlyVisibleComponent}
       </React.Fragment>
     );
