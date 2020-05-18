@@ -20,7 +20,7 @@ Place.propTypes = {
   whenClickPlace: PropTypes.func,
   placeName: PropTypes.string,
   address: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.number,
 }
 
 export default Place;

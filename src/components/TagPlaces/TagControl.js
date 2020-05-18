@@ -2,6 +2,7 @@ import React from 'react';
 import TagList from './TagList';
 import MapSearch from './MapSearch';
 import NewTagForm from './NewTagForm';
+import EditTagForm from './EditTagForm';
 import PlaceDetail from './PlaceDetails';
 import PropTypes from 'prop-types';
 import {v4} from 'uuid';
@@ -11,6 +12,7 @@ class TagControl extends React.Component {
     super(props);
     this.state = {
       addTagFormVisible: false,
+      editTagFormVisible: false,
       tagListVisible: false,
       mapSearchVisible: true,
       selectedPlace: null,
@@ -58,17 +60,20 @@ class TagControl extends React.Component {
     }));
   }
 
-  handleToggleAddTagForm = () => {
+  handleToggleAddTagForm = (id) => {
+    const placeToAdd = this.state.masterPlaceList.filter(place => place.id === id)[0];
     this.setState(prevState => ({
-      addTagFormVisible: !prevState.addTagFormVisible
+      addTagFormVisible: !prevState.addTagFormVisible,
+      placeToAdd: placeToAdd
     }));
   }
 
-  handleAddingNewTag = (newTag) => {
-    const newMasterTagList = this.state.masterTagList.concat(newTag);
+  handleAddingNewTag = () => {
+    const newMasterTagList = this.state.masterTagList.concat(this.state.placeToAdd);
     this.setState({
       masterTagList: newMasterTagList,
-      addTagFormVisible: false
+      addTagFormVisible: false,
+      placeToAdd: null
     });
   }
 
@@ -77,17 +82,50 @@ class TagControl extends React.Component {
     this.setState({selectedPlace: selectedPlace});
   }
 
+  handleChangingSelectedTag = (id) => {
+    const selectedTag = this.state.masterTagList.filter(tag => tag.id ===id)[0];
+    this.setState({selectedTag: selectedTag});
+  }
+
+  handleDeletingTag = (id) => {
+    const newMasterTagList = this.state.masterTagList.filter(tag => tag.id !==id);
+    this.setState({
+      masterTagList: newMasterTagList,
+      selectedTag: null
+    })
+  }
+
+  handleEditingTag = (id) => {
+    const newMasterTagList = this.state.masterTagList.filter(tag => tag.id ===id);
+    this.setState({
+      masterTagList: newMasterTagList,
+      selectedTag: null
+    })
+  }
+
   setVisibility = () => {
     if(this.state.tagListVisible){
-      return <TagList tagList={this.state.masterTagList}/>;
+      return <TagList 
+      tagList={this.state.masterTagList}
+      onDeleteClick={this.handleDeletingTag}
+      onEditClick={this.handleChangingSelectedTag}
+    />;
     } else if (this.state.selectedPlace != null){
       return <PlaceDetail place = {this.state.selectedPlace} />
     } else if (this.state.addTagFormVisible){
       return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} />
+    } else if (this.state.editTagFormVisible){
+      return <EditTagForm onEditTag = {this.handleEditingTag} />
+    } else if (this.state.selectedTag != null){
+      return <TagList 
+        tagList={this.state.masterTagList}
+        onEditClick={this.handleEditingTag}
+        onDeleteClick={this.handleDeletingTag}
+      />
     } else {
       return <MapSearch 
         placesList={this.state.masterPlaceList}
-        placeToAdd={this.handleAddingNewTag}
+        placeToAdd={this.handleToggleAddTagForm}
         showPlaceDetails={this.handleChangingSelectedPlace}
       />;
     }

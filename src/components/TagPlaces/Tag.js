@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 function Tag(props){
   return(
     <React.Fragment>
+      <hr />
       <h5>Tagged?: {props.tagStatus.toString()} - {props.dateCreated.toString()}</h5>
       <h3>{props.nickName} - ({props.placeName})</h3>
       <h4>{props.address} | {props.coordinates}</h4>
