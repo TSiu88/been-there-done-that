@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { v4 } from 'uuid';
 
 function NewTagForm(props){
 
@@ -9,14 +10,14 @@ function NewTagForm(props){
       nickName: event.target.nickName.value,
       personalNote: event.target.personalNote.value,
     }
-    props.onFormSubmit(newTag);
+    props.onNewTagCreation(newTag);
   }
 
   return (
     <React.Fragment>
       <h2>NEW TAG FORM</h2>
       <div>
-        <form onFormSubmit={handleNewTagFormSubmission}>
+        <form onNewTagCreation={handleNewTagFormSubmission}>
           <div>
             <label name='nickName'>Nickname (optional): </label>
             <input 
@@ -43,7 +44,8 @@ function NewTagForm(props){
 }
 
 NewTagForm.propTypes = {
-  onFormSubmit: PropTypes.func
+  onFormSubmit: PropTypes.func,
+  onNewTagCreation: PropTypes.func
 }
 
 export default NewTagForm;

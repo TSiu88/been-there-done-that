@@ -1,13 +1,14 @@
 import React from 'react';
 import TagList from './TagList';
 import MapSearch from './MapSearch';
-//import NewTagForm from './NewTagForm';
+import NewTagForm from './NewTagForm';
 import PropTypes from 'prop-types';
 
 class TagControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      addTagFormVisible: false,
       tagListVisible: false,
       mapSearchVisible: true,
       selectedPlace: null,
@@ -35,6 +36,11 @@ class TagControl extends React.Component {
           personalNote: "testing2 testing2",
           dateCreated: Date.now()
         }
+      ],
+      masterPlaceList: [
+        {
+          
+        }
       ]
     };
   }
@@ -46,17 +52,30 @@ class TagControl extends React.Component {
     }));
   }
 
+  handleToggleAddTagForm = () => {
+    this.setState(prevState => ({
+      addTagFormVisible: !prevState.addTagFormVisible
+    }));
+  }
+
   handleAddingNewTag = (newTag) => {
-    
+    const newMasterTagList = this.state.masterTagList.concat(newTag);
+    this.setState({
+      masterTagList: newMasterTagList,
+      addTagFormVisible: false
+    });
   }
 
   handleChangingSelectedPlace = (id) => {
-
+    const selectedPlace = this.state.masterPlaceList.filter(place => place.id === id)[0];
+    this.setState({selectedPlace: selectedPlace});
   }
 
   setVisibility = () => {
     if(this.state.tagListVisible){
       return <TagList tagList={this.state.masterTagList}/>;
+    } else if (this.state.addTagFormVisible){
+      return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} />
     } else {
       return <MapSearch />;
     }
@@ -75,7 +94,8 @@ class TagControl extends React.Component {
 }
 
 TagControl.propTypes = {
-  tagListVisible: PropTypes.bool
+  tagListVisible: PropTypes.bool,
+  addTagFormVisible: PropTypes.bool
 };
 
 export default TagControl;
