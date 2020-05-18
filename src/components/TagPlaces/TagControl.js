@@ -95,12 +95,18 @@ class TagControl extends React.Component {
     })
   }
 
-  handleEditingTag = (id) => {
-    const newMasterTagList = this.state.masterTagList.filter(tag => tag.id ===id);
+  handleEditClick = () => {
+    this.setState({editTagFormVisible: true});
+  }
+
+  handleEditingTag = (editedTag) => {
+    const editedMasterTagList = this.state.masterTagList.filter(tag => tag.id 
+      !==this.state.selectedTag.id).concat(editedTag);
     this.setState({
-      masterTagList: newMasterTagList,
-      selectedTag: null
-    })
+      masterTagList: editedMasterTagList,
+      selectedTag: null,
+      editTagFormVisible: false
+    });
   }
 
   setVisibility = () => {
@@ -108,14 +114,14 @@ class TagControl extends React.Component {
       return <TagList 
       tagList={this.state.masterTagList}
       onDeleteClick={this.handleDeletingTag}
-      onEditClick={this.handleChangingSelectedTag}
+      onEditClick={this.handleEditClick}
     />;
     } else if (this.state.selectedPlace != null){
       return <PlaceDetail place = {this.state.selectedPlace} />
     } else if (this.state.addTagFormVisible){
       return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} />
     } else if (this.state.editTagFormVisible){
-      return <EditTagForm onEditTag = {this.handleEditingTag} />
+      return <EditTagForm tag = { this.state.selectedTag} onEditTag = {this.handleEditingTag} />
     } else if (this.state.selectedTag != null){
       return <TagList 
         tagList={this.state.masterTagList}

@@ -1,15 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReusableForm from './ReusableForm';
 
 function EditTagForm(props){
+  const {tag} = props;
 
   const handleEditTagFormSubmission = (event) => {
     event.preventDefault();
     const newTag = {
       nickName: event.target.nickName.value,
       personalNote: event.target.personalNote.value,
+      id: tag.id
     }
-    props.onNewTagCreation(newTag);
+    props.onEditTag(newTag);
   }
 
   return (
@@ -23,4 +26,9 @@ function EditTagForm(props){
     </React.Fragment>
   );
 }
+
+EditTagForm.propTypes = {
+  onEditTag: PropTypes.func
+}
+
 export default EditTagForm;
