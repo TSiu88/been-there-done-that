@@ -30,3 +30,4 @@
 
 - 9:10am - Update Trello, research issues having with react and project structure
 - 10:30am - Compare code to examples to try to figure out why parts not working
+- 12:20pm - Lunch

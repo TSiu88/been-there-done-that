@@ -5,9 +5,9 @@ import NewTagForm from './NewTagForm';
 import EditTagForm from './EditTagForm';
 import PlaceDetail from './PlaceDetails';
 import PropTypes from 'prop-types';
-//import {v4} from 'uuid';
 import { connect } from 'react-redux';
 import * as a from './../../actions';
+import { withFirestore } from 'react-redux-firebase';
 
 class TagControl extends React.Component {
   constructor(props) {
@@ -54,16 +54,16 @@ class TagControl extends React.Component {
   }
 
   handleToggleListMap = () => {
-    if (this.state.selectedTag != null){
+    if (this.state.mapSearchVisible){
       this.setState({
-        selectedTag: null,
-        editTagFormVisible: false,
-        addTagFormVisible: false
+        mapSearchVisible: false,
+        tagListVisible: true
       });
     } else {
-      const { dispatch } = this.props;
-      const action = a.toggleForm();
-      dispatch(action);
+      this.setState({
+        mapSearchVisible: true,
+        tagListVisible: false
+      });
     }
   }
 
@@ -82,26 +82,34 @@ class TagControl extends React.Component {
     }
   }
 
-  handleAddingNewTag = (placeToAdd) => {
+  handleAddingNewTag = () => {
     const { dispatch } = this.props;
-    const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} = placeToAdd;
-    const action = a.addOrUpdateTag(placeToAdd);
+    const action = a.toggleAddForm();
     dispatch(action);
-    this.setState({
-      placeToAdd: null
-    });
-    const action2 = a.toggleForm();
-    dispatch(action2);
   }
 
-  handleChangingSelectedPlace = (id) => {
-    const selectedPlace = this.state.masterPlaceList.filter(place => place.id === id)[0];
-    this.setState({selectedPlace: selectedPlace});
-  }
+  // handleChangingSelectedPlace = (id) => {
+  //   const selectedPlace = this.state.masterPlaceList.filter(place => place.id === id)[0];
+  //   this.setState({selectedPlace: selectedPlace});
+  // }
 
   handleChangingSelectedTag = (id) => {
+    this.props.firestore.get({collection: 'tags', doc: id}).then((tag) => {
+      const firestoreTag = {
+        id: tag.id,
+        userId: tag.get("userId"),
+        tagStatus: tag.get("tagStatus"),
+        nickName: tag.get("nickName"),
+        placeName: tag.get("placeName"),
+        description: tag.get("description"),
+        address: tag.get("address"),
+        coordinates: tag.get("coordinates"),
+        personalNote: tag.get("personalNote"),
+        dateCreated: tag.get("dateCreated")
+      }
+      this.setState({selectedTag: firestoreTag });
+    });
     const selectedTag = this.props.masterTagList[id];
-    this.setState({selectedTag: selectedTag});
   }
 
   handleDeletingTag = (id) => {
@@ -117,11 +125,7 @@ class TagControl extends React.Component {
     this.setState({editTagFormVisible: true});
   }
 
-  handleEditingTag = (editedTag) => {
-    const { dispatch } = this.props;
-    const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} = editedTag;
-    const action = a.addOrUpdateTag(editedTag);
-    dispatch(action);
+  handleEditingTag = () => {
     this.setState({
       selectedTag: null,
       editTagFormVisible: false
@@ -179,6 +183,8 @@ const mapStateToProps = state => {
   return {
     masterTagList: state.masterTagList,
     masterPlaceList: state.masterPlaceList,
+    tagListVisible: state.tagListVisible,
+    mapSearchVisible: state.mapSearchVisible,
     addTagFormVisible: state.addTagFormVisible,
     editTagFormVisible: state.editTagFormVisible
   }
@@ -186,4 +192,4 @@ const mapStateToProps = state => {
 
 TagControl = connect(mapStateToProps)(TagControl);
 
-export default TagControl;
+export default withFirestore(TagControl);

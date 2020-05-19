@@ -7,18 +7,6 @@ export const toggleForm = () => ({
   type: 'TOGGLE_FORM'
 });
 
-export const addOrUpdateTag = (tag) => {
-  const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} =  tag;
-  return {
-    type: 'ADD_OR_UPDATE_TAG',
-    id: id,
-    tagStatus: tagStatus,
-    nickName: nickName,
-    placeName: placeName,
-    description: description,
-    address: address,
-    coordinates: coordinates,
-    personalNote: personalNote,
-    dateCreated: dateCreated
-  }
-}
+export const toggleAddForm = () => ({
+  type: 'TOGGLE_ADD_FORM'
+});

@@ -14,26 +14,4 @@ describe('actions', () => {
     });
   });
 
-  it('addTag should create ADD_OR_UPDATE_TAG action', () => {
-    expect(actions.addOrUpdateTag({
-      tagStatus: true,
-      nickName: "nick one",
-      placeName: "place name",
-      description: "tester place desc",
-      address: "123 Street",
-      coordinates: "xxx,yyy",
-      personalNote: "testing testing",
-      id: 1
-    })).toEqual({
-      type: 'ADD_OR_UPDATE_TAG',
-      tagStatus: true,
-      nickName: "nick one",
-      placeName: "place name",
-      description: "tester place desc",
-      address: "123 Street",
-      coordinates: "xxx,yyy",
-      personalNote: "testing testing",
-      id: 1
-    });
-  });
 });

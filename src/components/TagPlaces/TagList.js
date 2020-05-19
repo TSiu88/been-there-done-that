@@ -1,13 +1,20 @@
 import React from 'react';
 import Tag from './Tag';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux'
+import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
 function TagList(props){
+  useFirestoreConnect([
+    { collection: 'tags' }
+  ]);
+  const tags = useSelector(state => state.firestore.ordered.tags);
+  if (isLoaded(tags)) {
   return(
     <React.Fragment>
       <hr />
       <h2>TAG LIST</h2>
-      {Object.values(props.tagList).map((tag) => {
+      {tags.map((tag) => {
         console.log("TAG", tag);
         return <Tag
           tagStatus={tag.tagStatus}
@@ -26,12 +33,18 @@ function TagList(props){
       })}
     </React.Fragment>
   );
+  } else {
+    return(
+      <React.Fragment>
+        <h3>Loading...</h3>
+      </React.Fragment>
+    );
+  }
 }
 
 TagList.propTypes = {
   onEditClick: PropTypes.func,
   onDeleteClick: PropTypes.func,
-  tagList: PropTypes.object
 }
 
 export default TagList;

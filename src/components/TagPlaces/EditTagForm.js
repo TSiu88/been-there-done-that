@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReusableForm from './ReusableForm';
+import { useFirestore } from 'react-redux-firebase';
 
 function EditTagForm(props){
+  const firestore = useFirestore();
   const {tag} = props;
 
   const handleEditTagFormSubmission = (event) => {
     event.preventDefault();
-    const newTag = {
+    props.onEditTag();
+    const updatedTag = {
       nickName: event.target.nickName.value,
-      personalNote: event.target.personalNote.value,
-      id: tag.id
+      personalNote: event.target.personalNote.value
     }
-    props.onEditTag(newTag);
+    return firestore.update({collection: 'tags', doc: tag.id}, updatedTag);
   }
 
   return (
@@ -20,8 +22,6 @@ function EditTagForm(props){
       <ReusableForm
         formSubmissionHandler={handleEditTagFormSubmission}
         formType="Edit Tag"
-        // placeName={event.target.placeName.value}
-        // coordinates={event.target.coordinates.value}
       />
     </React.Fragment>
   );
