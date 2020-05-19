@@ -19,7 +19,7 @@ function MapSearch(props){
 MapSearch.propTypes = {
   placeToAdd: PropTypes.func,
   showPlaceDetails: PropTypes.func,
-  placesList: PropTypes.object
+  // placesList: PropTypes.object
 }
 
 export default MapSearch;

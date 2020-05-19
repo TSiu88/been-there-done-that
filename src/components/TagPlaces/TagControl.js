@@ -109,16 +109,11 @@ class TagControl extends React.Component {
       }
       this.setState({selectedTag: firestoreTag });
     });
-    const selectedTag = this.props.masterTagList[id];
   }
 
   handleDeletingTag = (id) => {
-    const { dispatch } = this.props;
-    const action = a.deleteTag(id);
-    dispatch(action);
-    this.setState({
-      selectedTag: null
-    })
+    this.props.firestore.delete({collection: 'tags', doc: id});
+    this.setState({selectedTag: null});
   }
 
   handleEditClick = () => {
@@ -135,7 +130,6 @@ class TagControl extends React.Component {
   setVisibility = () => {
     if(this.state.tagListVisible){
       return <TagList 
-      tagList={this.props.masterTagList}
       onDeleteClick={this.handleDeletingTag}
       onEditClick={this.handleEditClick}
     />;
@@ -147,13 +141,11 @@ class TagControl extends React.Component {
       return <EditTagForm tag = { this.state.selectedTag} onEditTag = {this.handleEditingTag} />
     } else if (this.state.selectedTag != null){
       return <TagList 
-        tagList={this.props.masterTagList}
         onEditClick={this.handleEditingTag}
         onDeleteClick={this.handleDeletingTag}
       />
     } else {
       return <MapSearch 
-        placesList={this.props.masterPlaceList}
         placeToAdd={this.handleToggleAddTagForm}
         showPlaceDetails={this.handleChangingSelectedPlace}
       />;
@@ -175,14 +167,10 @@ class TagControl extends React.Component {
 TagControl.propTypes = {
   tagListVisible: PropTypes.bool,
   addTagFormVisible: PropTypes.bool,
-  masterTagList: PropTypes.object,
-  masterPlaceList: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
-    masterTagList: state.masterTagList,
-    masterPlaceList: state.masterPlaceList,
     tagListVisible: state.tagListVisible,
     mapSearchVisible: state.mapSearchVisible,
     addTagFormVisible: state.addTagFormVisible,
