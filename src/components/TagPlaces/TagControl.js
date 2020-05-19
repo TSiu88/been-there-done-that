@@ -5,15 +5,14 @@ import NewTagForm from './NewTagForm';
 import EditTagForm from './EditTagForm';
 import PlaceDetail from './PlaceDetails';
 import PropTypes from 'prop-types';
-import {v4} from 'uuid';
+//import {v4} from 'uuid';
 import { connect } from 'react-redux';
+import * as a from './../../actions';
 
 class TagControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addTagFormVisible: false,
-      editTagFormVisible: false,
       tagListVisible: false,
       mapSearchVisible: true,
       selectedPlace: null,
@@ -55,40 +54,44 @@ class TagControl extends React.Component {
   }
 
   handleToggleListMap = () => {
-    this.setState(prevState => ({
-      tagListVisible: !prevState.tagListVisible,
-      mapSearchVisible: !prevState.mapSearchVisible
-    }));
+    if (this.state.selectedTag != null){
+      this.setState({
+        selectedTag: null,
+        editTagFormVisible: false,
+        addTagFormVisible: false
+      });
+    } else {
+      const { dispatch } = this.props;
+      const action = a.toggleForm();
+      dispatch(action);
+    }
   }
 
-  handleToggleAddTagForm = (id) => {
-    const placeToAdd = this.state.masterPlaceList.filter(place => place.id === id)[0];
-    this.setState(prevState => ({
-      addTagFormVisible: !prevState.addTagFormVisible,
-      placeToAdd: placeToAdd
-    }));
+  handleToggleAddTagForm = () => {
+    if (this.state.selectedTag != null){
+      this.setState({
+        selectedTag: null,
+        editTagFormVisible: false,
+        addTagFormVisible: false,
+        mapSearchVisible: true
+      });
+    } else {
+      const { dispatch } = this.props;
+      const action = a.toggleForm();
+      dispatch(action);
+    }
   }
 
   handleAddingNewTag = (placeToAdd) => {
     const { dispatch } = this.props;
     const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} = placeToAdd;
-    const action = {
-      type: 'ADD_OR_UPDATE_TAG',
-      id: id,
-      tagStatus: tagStatus,
-      nickName: nickName,
-      placeName: placeName,
-      description: description,
-      address: address,
-      coordinates: coordinates,
-      personalNote: personalNote,
-      dateCreated: dateCreated
-    };
+    const action = a.addOrUpdateTag(placeToAdd);
     dispatch(action);
     this.setState({
-      addTagFormVisible: false,
       placeToAdd: null
     });
+    const action2 = a.toggleForm();
+    dispatch(action2);
   }
 
   handleChangingSelectedPlace = (id) => {
@@ -103,10 +106,8 @@ class TagControl extends React.Component {
 
   handleDeletingTag = (id) => {
     const { dispatch } = this.props;
-    const action = { 
-      type: 'DELETE_TAG',
-      id: id
-    }
+    const action = a.deleteTag(id);
+    dispatch(action);
     this.setState({
       selectedTag: null
     })
@@ -119,18 +120,7 @@ class TagControl extends React.Component {
   handleEditingTag = (editedTag) => {
     const { dispatch } = this.props;
     const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} = editedTag;
-    const action = {
-      type: 'ADD_OR_UPDATE_TAG',
-      id: id,
-      tagStatus: tagStatus,
-      nickName: nickName,
-      placeName: placeName,
-      description: description,
-      address: address,
-      coordinates: coordinates,
-      personalNote: personalNote,
-      dateCreated: dateCreated
-    };
+    const action = a.addOrUpdateTag(editedTag);
     dispatch(action);
     this.setState({
       selectedTag: null,
@@ -147,9 +137,9 @@ class TagControl extends React.Component {
     />;
     } else if (this.state.selectedPlace != null){
       return <PlaceDetail place = {this.state.selectedPlace} />
-    } else if (this.state.addTagFormVisible){
+    } else if (this.props.addTagFormVisible){
       return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} />
-    } else if (this.state.editTagFormVisible){
+    } else if (this.props.editTagFormVisible){
       return <EditTagForm tag = { this.state.selectedTag} onEditTag = {this.handleEditingTag} />
     } else if (this.state.selectedTag != null){
       return <TagList 
@@ -187,8 +177,10 @@ TagControl.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    masterTagList: state,
-    masterPlaceList: state
+    masterTagList: state.masterTagList,
+    masterPlaceList: state.masterPlaceList,
+    addTagFormVisible: state.addTagFormVisible,
+    editTagFormVisible: state.editTagFormVisible
   }
 }
 

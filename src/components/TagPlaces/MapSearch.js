@@ -6,11 +6,11 @@ function MapSearch(props){
   return (
     <React.Fragment>
       <h2>MAP SEARCH</h2>
-      <PlaceList 
+      {/* <PlaceList 
         onTaggingClick={props.placeToAdd}
         onDetailsClick={props.showPlaceDetails}
         places = {props.placesList}
-      />
+      /> */}
       {/* Map from API here */}
     </React.Fragment>
   );

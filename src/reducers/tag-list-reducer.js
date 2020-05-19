@@ -1,7 +1,9 @@
+import * as c from './../actions/ActionTypes';
+
 export default (state = {}, action) => {
   const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} = action;
   switch (action.type){
-    case 'ADD_OR_UPDATE_TAG':
+    case c.ADD_OR_UPDATE_TAG:
       return Object.assign({}, state, {
         [id]: {
           id: id,
@@ -15,7 +17,7 @@ export default (state = {}, action) => {
           dateCreated: dateCreated
         }
       });
-    case 'DELETE_TAG':
+    case c.DELETE_TAG:
       const newState = { ...state};
       delete newState[id];  
       return newState;
