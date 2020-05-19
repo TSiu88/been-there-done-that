@@ -25,3 +25,8 @@
 - 9:40am - Research mapbox and React examples and tutorials
 - 10:50am - Consider sparation of mapbox components or if mapbox is a single component in project, examine examples and tutorials
 - 1:30pm - Lunch
+
+## Tuesdat 5/19/2020
+
+- 9:10am - Update Trello, research issues having with react and project structure
+- 10:30am - Compare code to examples to try to figure out why parts not working
