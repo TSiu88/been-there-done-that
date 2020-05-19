@@ -24,3 +24,4 @@
 - 8:45am - Update Trello, Review Component Diagram
 - 9:40am - Research mapbox and React examples and tutorials
 - 10:50am - Consider sparation of mapbox components or if mapbox is a single component in project, examine examples and tutorials
+- 1:30pm - Lunch

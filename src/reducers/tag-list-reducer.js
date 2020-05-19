@@ -15,6 +15,10 @@ export default (state = {}, action) => {
           dateCreated: dateCreated
         }
       });
+    case 'DELETE_TAG':
+      const newState = { ...state};
+      delete newState[id];  
+      return newState;
     default:
       return state;
   }

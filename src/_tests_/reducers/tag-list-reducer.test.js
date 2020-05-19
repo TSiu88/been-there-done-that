@@ -5,6 +5,7 @@ describe('tagListReducer', () => {
 
   let action;
   const firstId = v4();
+  const secondId = v4();
   const tagData = {
     id: firstId,
     tagStatus: true,
@@ -16,6 +17,29 @@ describe('tagListReducer', () => {
     personalNote: "testing testing",
     dateCreated: Date.now()
   };
+  const currentState = {
+    [firstId]: {
+      id: firstId,
+      tagStatus: true,
+      nickName: "nick one",
+      placeName: "place name",
+      description: "tester place desc",
+      address: "123 Street",
+      coordinates: "xxx,yyy",
+      personalNote: "testing testing",
+    },
+    [secondId]: {
+      id: secondId,
+      tagStatus: true,
+      nickName: "nick two",
+      placeName: "place2 name",
+      description: "tester place2 desc",
+      address: "456 Street",
+      coordinates: "xxx,yyy",
+      personalNote: "testing2 testing2",
+    },
+  };
+
   test('Should return default state if no action type passed into reducer', () => {
     expect(tagListReducer({}, {type: null})).toEqual({});
   });
@@ -47,6 +71,25 @@ describe('tagListReducer', () => {
         dateCreated: dateCreated
       }
     })
+  });
+
+  test('Should delete a tag', () => {
+    action = {
+      type: 'DELETE_TAG',
+      id: firstId
+    };
+    expect(tagListReducer(currentState, action)).toEqual({
+      [secondId]: {
+        id: secondId,
+        tagStatus: true,
+        nickName: "nick two",
+        placeName: "place2 name",
+        description: "tester place2 desc",
+        address: "456 Street",
+        coordinates: "xxx,yyy",
+        personalNote: "testing2 testing2",
+      }
+    });
   });
 
 });

@@ -6,7 +6,7 @@ function PlaceList(props){
   return(
     <React.Fragment>
       <hr />
-      {props.places.map((place) => {
+      {Object.values(props.places).map((place) => {
         return <Place 
           whenTaggingClick={place.onTaggingClick}
           whenClickPlace={place.onDetailsClick}
@@ -23,7 +23,7 @@ function PlaceList(props){
 PlaceList.propTypes = {
   onTaggingClick: PropTypes.func,
   onDetailsClick: PropTypes.func,
-  places: PropTypes.array 
+  places: PropTypes.object
 }
 
 export default PlaceList;

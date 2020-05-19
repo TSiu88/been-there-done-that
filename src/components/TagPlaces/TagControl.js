@@ -6,6 +6,7 @@ import EditTagForm from './EditTagForm';
 import PlaceDetail from './PlaceDetails';
 import PropTypes from 'prop-types';
 import {v4} from 'uuid';
+import { connect } from 'react-redux';
 
 class TagControl extends React.Component {
   constructor(props) {
@@ -18,38 +19,38 @@ class TagControl extends React.Component {
       selectedPlace: null,
       placeToAdd: null,
       selectedTag: null,
-      masterTagList: [
-        {
-          id: v4(),
-          tagStatus: true,
-          nickName: "nick one",
-          placeName: "place name",
-          description: "tester place desc",
-          address: "123 Street",
-          coordinates: "xxx,yyy",
-          personalNote: "testing testing",
-          dateCreated: Date.now()
-        },
-        {
-          id: v4(),
-          tagStatus: true,
-          nickName: "nick two",
-          placeName: "place2 name",
-          description: "tester2 place desc",
-          address: "456 Street",
-          coordinates: "xxx,yyy",
-          personalNote: "testing2 testing2",
-          dateCreated: Date.now()
-        }
-      ],
-      masterPlaceList: [
-        {
-          id: 0,
-          placeName: "place0",
-          address: "000 Street",
-          coordinates: "xxx,yyy"
-        }
-      ]
+      // masterTagList: [
+      //   {
+      //     id: v4(),
+      //     tagStatus: true,
+      //     nickName: "nick one",
+      //     placeName: "place name",
+      //     description: "tester place desc",
+      //     address: "123 Street",
+      //     coordinates: "xxx,yyy",
+      //     personalNote: "testing testing",
+      //     dateCreated: Date.now()
+      //   },
+      //   {
+      //     id: v4(),
+      //     tagStatus: true,
+      //     nickName: "nick two",
+      //     placeName: "place2 name",
+      //     description: "tester2 place desc",
+      //     address: "456 Street",
+      //     coordinates: "xxx,yyy",
+      //     personalNote: "testing2 testing2",
+      //     dateCreated: Date.now()
+      //   }
+      // ],
+      // masterPlaceList: [
+      //   {
+      //     id: 0,
+      //     placeName: "place0",
+      //     address: "000 Street",
+      //     coordinates: "xxx,yyy"
+      //   }
+      // ]
     };
   }
 
@@ -68,10 +69,23 @@ class TagControl extends React.Component {
     }));
   }
 
-  handleAddingNewTag = () => {
-    const newMasterTagList = this.state.masterTagList.concat(this.state.placeToAdd);
+  handleAddingNewTag = (placeToAdd) => {
+    const { dispatch } = this.props;
+    const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} = placeToAdd;
+    const action = {
+      type: 'ADD_OR_UPDATE_TAG',
+      id: id,
+      tagStatus: tagStatus,
+      nickName: nickName,
+      placeName: placeName,
+      description: description,
+      address: address,
+      coordinates: coordinates,
+      personalNote: personalNote,
+      dateCreated: dateCreated
+    };
+    dispatch(action);
     this.setState({
-      masterTagList: newMasterTagList,
       addTagFormVisible: false,
       placeToAdd: null
     });
@@ -83,14 +97,17 @@ class TagControl extends React.Component {
   }
 
   handleChangingSelectedTag = (id) => {
-    const selectedTag = this.state.masterTagList.filter(tag => tag.id ===id)[0];
+    const selectedTag = this.props.masterTagList[id];
     this.setState({selectedTag: selectedTag});
   }
 
   handleDeletingTag = (id) => {
-    const newMasterTagList = this.state.masterTagList.filter(tag => tag.id !==id);
+    const { dispatch } = this.props;
+    const action = { 
+      type: 'DELETE_TAG',
+      id: id
+    }
     this.setState({
-      masterTagList: newMasterTagList,
       selectedTag: null
     })
   }
@@ -100,10 +117,22 @@ class TagControl extends React.Component {
   }
 
   handleEditingTag = (editedTag) => {
-    const editedMasterTagList = this.state.masterTagList.filter(tag => tag.id 
-      !==this.state.selectedTag.id).concat(editedTag);
+    const { dispatch } = this.props;
+    const { id, tagStatus, nickName, placeName, description, address, coordinates, personalNote, dateCreated} = editedTag;
+    const action = {
+      type: 'ADD_OR_UPDATE_TAG',
+      id: id,
+      tagStatus: tagStatus,
+      nickName: nickName,
+      placeName: placeName,
+      description: description,
+      address: address,
+      coordinates: coordinates,
+      personalNote: personalNote,
+      dateCreated: dateCreated
+    };
+    dispatch(action);
     this.setState({
-      masterTagList: editedMasterTagList,
       selectedTag: null,
       editTagFormVisible: false
     });
@@ -112,7 +141,7 @@ class TagControl extends React.Component {
   setVisibility = () => {
     if(this.state.tagListVisible){
       return <TagList 
-      tagList={this.state.masterTagList}
+      tagList={this.props.masterTagList}
       onDeleteClick={this.handleDeletingTag}
       onEditClick={this.handleEditClick}
     />;
@@ -124,13 +153,13 @@ class TagControl extends React.Component {
       return <EditTagForm tag = { this.state.selectedTag} onEditTag = {this.handleEditingTag} />
     } else if (this.state.selectedTag != null){
       return <TagList 
-        tagList={this.state.masterTagList}
+        tagList={this.props.masterTagList}
         onEditClick={this.handleEditingTag}
         onDeleteClick={this.handleDeletingTag}
       />
     } else {
       return <MapSearch 
-        placesList={this.state.masterPlaceList}
+        placesList={this.props.masterPlaceList}
         placeToAdd={this.handleToggleAddTagForm}
         showPlaceDetails={this.handleChangingSelectedPlace}
       />;
@@ -151,7 +180,18 @@ class TagControl extends React.Component {
 
 TagControl.propTypes = {
   tagListVisible: PropTypes.bool,
-  addTagFormVisible: PropTypes.bool
+  addTagFormVisible: PropTypes.bool,
+  masterTagList: PropTypes.object,
+  masterPlaceList: PropTypes.object
 };
+
+const mapStateToProps = state => {
+  return {
+    masterTagList: state,
+    masterPlaceList: state
+  }
+}
+
+TagControl = connect(mapStateToProps)(TagControl);
 
 export default TagControl;

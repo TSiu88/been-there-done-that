@@ -7,7 +7,7 @@ function TagList(props){
     <React.Fragment>
       <hr />
       <h2>TAG LIST</h2>
-      {props.tagList.map((tag) => {
+      {Object.values(props.tagList).map((tag) => {
         console.log("TAG", tag);
         return <Tag
           tagStatus={tag.tagStatus}
@@ -31,7 +31,7 @@ function TagList(props){
 TagList.propTypes = {
   onEditClick: PropTypes.func,
   onDeleteClick: PropTypes.func,
-  tagList: PropTypes.array
+  tagList: PropTypes.object
 }
 
 export default TagList;
