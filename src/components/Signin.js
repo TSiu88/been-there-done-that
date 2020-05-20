@@ -56,7 +56,7 @@ function Signin(){
     return (
       <React.Fragment>
         <div className="authForm">
-          <h3>You are signed in as {auth.currentUser.displayName}.  Sign out?</h3>
+          <h3>You are signed in as {auth.currentUser.displayName} ({auth.currentUser.uid}).  Sign out?</h3>
           <button className="btn btn-primary" onClick={doSignOut}>Sign out</button>
           <br />
           <Link to="/">Return to Map</Link>

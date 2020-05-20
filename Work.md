@@ -35,3 +35,5 @@
 ## Wednesday 5/20/2020
 - 9:20am - Internship cover letters and resume
 - 10:30am - Look up mapbox API examples to show map and header
+- 1:35pm - Lunch
+- 3:20pm - Research how to get multiple search results instead of point, how to add to list for display

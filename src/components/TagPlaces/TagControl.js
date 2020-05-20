@@ -11,6 +11,8 @@ import { withFirestore, isLoaded } from 'react-redux-firebase';
 import mapboxgl from 'mapbox-gl';
 
 let buttonText = "My Tagged Places";
+let geocoder;
+let query;
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 var MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
 class TagControl extends React.Component {
@@ -23,6 +25,8 @@ class TagControl extends React.Component {
       selectedPlace: null,
       placeToAdd: null,
       selectedTag: null,
+      searchResults: [],
+      isLoaded: false,
       lng: -122,
       lat: 47.5,
       zoom: 7
@@ -48,13 +52,80 @@ class TagControl extends React.Component {
     });
 
     // Add geocoder
-    var geocoder = new MapboxGeocoder({
+    geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl
       });
        
       document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
   }
+
+  componentDidUpdate() {
+    geocoder.on('result', function(data) { // When the geocoder returns a result
+      let point = data.result.center; // Capture the result coordinates
+
+      //Add Tilequery API call variable setting here
+      const tileset = 'mapbox.mapbox-streets-v8'; // replace this with the ID of the tileset
+      const radius = 1609; // 1609 meters is roughly equal to one mile
+      const limit = 10; // The maximum amount of results to return
+
+      // Create new variable for Tilequery API request
+      query = 'https://api.mapbox.com/v4/' + tileset + '/tilequery/' + point[0] + ',' + point[1] + '.json?radius=' + radius + '&limit= ' + limit + '&dedupe&layers=poi_label&access_token=' + mapboxgl.accessToken;
+
+      this.makeApiSearchCall();
+
+      //Make the Tilequery API call with ajax
+      // makeApiSearchCall = () => {
+      //   fetch(query).then(response => response.json())
+      //   .then(
+      //     (jsonifiedResponse) => {
+      //       this.setState({
+      //         isLoaded: true,
+      //         searchResults: jsonifiedResponse.results
+      //       });
+      //     })
+      //     .catch((error) => {
+      //       this.setState({
+      //         isLoaded: true,
+      //         error
+      //       });
+      //     });
+      // }
+        console.log(data); // Shows results from search
+  //       // Code from the next step will go here
+  //       map.getSource('tilequery').setData(data);
+  //     })
+
+  //     marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
+
+  //   });
+
+  //   // Add markers to found results of Tilequery API call
+  //   map.addSource('tilequery', { // Add a new source to the map style: https://docs.mapbox.com/mapbox-gl-js/api/#map#addsource
+  //     type: "geojson",
+  //     data: {
+  //       "type": "FeatureCollection",
+  //       "features": []
+  //     }
+    });
+  }
+
+  makeApiSearchCall = () => {
+    fetch(query).then(response => response.json())
+    .then(
+      (jsonifiedResponse) => {
+        this.setState({
+          isLoaded: true,
+          searchResults: jsonifiedResponse.results
+        });
+      })
+      .catch((error) => {
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      });
+    }
 
   handleToggleListMap = () => {
     if (this.state.mapSearchVisible){
