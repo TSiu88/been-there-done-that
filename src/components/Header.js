@@ -26,13 +26,17 @@ function Header(props) {
   
   return (
     <React.Fragment>
-      <h1><Link to="/">Been There, Done That</Link></h1>
-      <div className="authNavBar">
-        <h4>
-          {userNameVisible}
-          {signInOutVisible}
-          {registerVisible}
-        </h4>
+      <div className="headerBar">
+        <div className="authNavBar">
+          <p><strong>
+            {userNameVisible}
+            {signInOutVisible}
+            {registerVisible}
+          </strong></p>
+        </div>
+        <div className="titleHeader">
+          <h1><Link to="/">Been There, Done That</Link></h1>
+        </div>
       </div>
     </React.Fragment>
   )

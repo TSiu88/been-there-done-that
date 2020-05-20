@@ -5,13 +5,17 @@ import PropTypes from 'prop-types';
 function MapSearch(props){
   return (
     <React.Fragment>
-      <h2>MAP SEARCH</h2>
       {/* <PlaceList 
         onTaggingClick={props.placeToAdd}
         onDetailsClick={props.showPlaceDetails}
         places = {props.placesList}
       /> */}
       {/* Map from API here */}
+      <div className="mapSidebar">
+        <h3>Search Results</h3>
+        <div id="listings" className="listings"></div>
+      </div>
+      <div id='map' class='map pad2'>Map</div>
     </React.Fragment>
   );
 }

@@ -8,8 +8,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as a from './../../actions';
 import { withFirestore, isLoaded } from 'react-redux-firebase';
+import mapboxgl from 'mapbox-gl';
 
 let buttonText = "My Tagged Places";
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 class TagControl extends React.Component {
 
   constructor(props) {
@@ -20,7 +22,29 @@ class TagControl extends React.Component {
       selectedPlace: null,
       placeToAdd: null,
       selectedTag: null,
+      lng: -122,
+      lat: 47.5,
+      zoom: 7
     };
+  }
+
+  // Initialize map with component did mount to render after element containing map created
+  componentDidMount() {
+    const map = new mapboxgl.Map({
+      container: "map", //map container reference where to render map
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [this.state.lng, this.state.lat],
+      zoom: this.state.zoom
+    });
+
+    // Store new lat, long, and zoom from interactions with map so it's interactable
+    map.on('move', () => {
+      this.setState({
+        lng: map.getCenter().lng.toFixed(4),
+        lat: map.getCenter().lat.toFixed(4),
+        zoom: map.getZoom().toFixed(2)
+      });
+    });
   }
 
   handleToggleListMap = () => {
@@ -136,9 +160,10 @@ class TagControl extends React.Component {
     }
     return(
       <React.Fragment>
-        <h2>TAG CONTROL</h2>
-        <button onClick={this.handleToggleListMap}>{buttonText}</button>
-        {currentlyVisibleComponent}
+        <div className="tagControlContainer">
+          <button onClick={this.handleToggleListMap}>{buttonText}</button>
+          {currentlyVisibleComponent}
+        </div>
       </React.Fragment>
     );
   }

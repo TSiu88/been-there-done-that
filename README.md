@@ -82,7 +82,7 @@ _There are currently no known bugs in this program_
 
 1. Download and install Node.js from the [official website](https://nodejs.org/en/download/)
 2. Clone the [repository](https://github.com/TSiu88/been-there-done-that.git) from my [GitHub page](https://github.com/TSiu88)
-3. Use a command line/Bash to move to the project directory with `cd project-directory-name-here`
+3. Use a command line/Bash to move to the project directory with `cd insert-project-directory-name-here`
 4. Run `npm install` to get all dependencies. 
 5. Run `npm run start` to start up the program 
 6. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

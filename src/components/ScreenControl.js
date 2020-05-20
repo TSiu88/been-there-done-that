@@ -31,7 +31,6 @@ function ScreenControl(props){
       </React.Fragment>
     );
   }
-  
 }
 
 export default ScreenControl;
