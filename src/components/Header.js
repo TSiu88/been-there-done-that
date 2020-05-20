@@ -5,7 +5,6 @@ import { isLoaded } from 'react-redux-firebase';
 
 function Header() {
 
-  
   const auth = firebase.auth();
 
   if(isLoaded(auth) && auth.currentUser == null){

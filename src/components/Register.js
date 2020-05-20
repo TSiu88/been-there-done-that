@@ -1,7 +1,11 @@
 import React from "react";
 import firebase from "firebase/app";
+import { withFirestore } from 'react-redux-firebase';
+import { useHistory } from 'react-router-dom';
 
 function Register(){  
+
+  let history = useHistory();
 
   function doSignUp(event) {
     event.preventDefault();
@@ -14,6 +18,7 @@ function Register(){
         displayName: username
       });
       console.log("successfully signed up!");
+      history.push('/');
     }).catch(function(error) {
       console.log(error.message);
     });
@@ -46,4 +51,4 @@ function Register(){
   );
 }
 
-export default Register;
+export default withFirestore(Register);

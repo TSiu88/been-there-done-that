@@ -7,9 +7,11 @@ import PlaceDetail from './PlaceDetails';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as a from './../../actions';
-import { withFirestore } from 'react-redux-firebase';
+import { withFirestore, isLoaded } from 'react-redux-firebase';
 
+let buttonText = "My Tagged Places";
 class TagControl extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,38 +20,6 @@ class TagControl extends React.Component {
       selectedPlace: null,
       placeToAdd: null,
       selectedTag: null,
-      // masterTagList: [
-      //   {
-      //     id: v4(),
-      //     tagStatus: true,
-      //     nickName: "nick one",
-      //     placeName: "place name",
-      //     description: "tester place desc",
-      //     address: "123 Street",
-      //     coordinates: "xxx,yyy",
-      //     personalNote: "testing testing",
-      //     dateCreated: Date.now()
-      //   },
-      //   {
-      //     id: v4(),
-      //     tagStatus: true,
-      //     nickName: "nick two",
-      //     placeName: "place2 name",
-      //     description: "tester2 place desc",
-      //     address: "456 Street",
-      //     coordinates: "xxx,yyy",
-      //     personalNote: "testing2 testing2",
-      //     dateCreated: Date.now()
-      //   }
-      // ],
-      // masterPlaceList: [
-      //   {
-      //     id: 0,
-      //     placeName: "place0",
-      //     address: "000 Street",
-      //     coordinates: "xxx,yyy"
-      //   }
-      // ]
     };
   }
 
@@ -59,11 +29,13 @@ class TagControl extends React.Component {
         mapSearchVisible: false,
         tagListVisible: true
       });
+      buttonText="Map Search";
     } else {
       this.setState({
         mapSearchVisible: true,
         tagListVisible: false
       });
+      buttonText="My Tagged Places";
     }
   }
 
@@ -154,10 +126,18 @@ class TagControl extends React.Component {
 
   render(){
     let currentlyVisibleComponent = this.setVisibility();
+    const auth = this.props.firebase.auth();
+    if (!isLoaded(auth)) {
+      return (
+        <React.Fragment>
+          <h1>Loading...</h1>
+        </React.Fragment>
+      )
+    }
     return(
       <React.Fragment>
         <h2>TAG CONTROL</h2>
-        <button onClick={this.handleToggleListMap}>Toggle</button>
+        <button onClick={this.handleToggleListMap}>{buttonText}</button>
         {currentlyVisibleComponent}
       </React.Fragment>
     );
