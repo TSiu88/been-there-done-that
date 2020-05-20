@@ -12,6 +12,7 @@ import mapboxgl from 'mapbox-gl';
 
 let buttonText = "My Tagged Places";
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+var MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
 class TagControl extends React.Component {
 
   constructor(props) {
@@ -45,6 +46,14 @@ class TagControl extends React.Component {
         zoom: map.getZoom().toFixed(2)
       });
     });
+
+    // Add geocoder
+    var geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl
+      });
+       
+      document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
   }
 
   handleToggleListMap = () => {

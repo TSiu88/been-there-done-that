@@ -12,10 +12,11 @@ function MapSearch(props){
       /> */}
       {/* Map from API here */}
       <div className="mapSidebar">
-        <h3>Search Results</h3>
+        <h2 className="mapHeading">Map Search</h2>
+        <div id="geocoder" className="geocoder"></div>
         <div id="listings" className="listings"></div>
       </div>
-      <div id='map' class='map pad2'>Map</div>
+      <div id='map' className='map pad2'>Map</div>
     </React.Fragment>
   );
 }

@@ -15,12 +15,20 @@
   margin-right: 10px;
 }
 
+.authForm {
+  text-align: center;
+}
+
 .headerBar {
-  height: 110px;
+  height: 20%;
 }
 
 .tagControlContainer {
   margin-left: 10px;
+}
+
+.splashDescription {
+  text-align: center;
 }
 
 body {
@@ -59,11 +67,12 @@ a:hover {
 .mapSidebar {
   position: absolute;
   width: 33.3333%;
-  height: 100%;
+  height: 80%;
   top: 140px;
   left: 0;
   overflow: hidden;
   border-right: 1px solid rgba(0, 0, 0, 0.25);
+  margin: 10px;
 }
 
 .pad2 {
@@ -76,20 +85,36 @@ a:hover {
   width: 66.6666%;
   top: 140px;
   bottom: 0;
+  height: 80%;
 }
 
-.heading {
+.geocoder {
+  position: absolute;
+  z-index: 1;
+  width: 90%;
+  left: 25%;
+  margin-left: -25%;
+  top: 25px;
+}
+
+.mapboxgl-ctrl-geocoder {
+min-width: 100%;
+}
+
+.mapHeading {
   background: #fff;
   border-bottom: 1px solid #eee;
-  height: 60px;
-  line-height: 60px;
+  height: 20px;
+  line-height: 20px;
   padding: 0 10px;
+  margin-top: 0px;
 }
 
 .listings {
-  height: 100%;
+  height: 80%;
   overflow: auto;
-  padding-bottom: 60px;
+  margin-top: 50px;
+  margin-right: 10px;
 }
 
 .listings .item {
@@ -204,5 +229,9 @@ a:hover {
 /* Adjust position of popup for heigh of marker */
 .mapboxgl-popup {
   padding-bottom: 50px;
+}
+
+.mapboxgl-canvas {
+  height: 80%;
 }
 

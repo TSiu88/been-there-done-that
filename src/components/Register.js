@@ -26,13 +26,14 @@ function Register(){
   
   return (
     <React.Fragment>
-      <h1>Register</h1>
-      <form onSubmit={doSignUp}>
+      <h2>Register</h2>
+      <form className="authForm" onSubmit={doSignUp}>
         <label name='username'>Username:{`\t`}</label>
         <input
           type='text'
           name='username'
           placeholder='username' />
+        <br />
         <br />
         <label name='email'>Email:{`\t`}</label>
         <input
@@ -40,13 +41,15 @@ function Register(){
           name='email'
           placeholder='email' />
         <br />
+        <br />
         <label name='password'>Password:{`\t`}</label>
         <input
           type='password'
           name='password'
           placeholder='Password' />
         <br />
-        <button type='submit'>Register</button>
+        <br />
+        <button className="btn btn-primary" type='submit'>Register</button>
       </form>
     </React.Fragment>
   );

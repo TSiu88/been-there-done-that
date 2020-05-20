@@ -32,13 +32,14 @@ function Signin(){
   if((isLoaded(auth)) && (auth.currentUser == null)){
     return (
       <React.Fragment>
-        <h1>Sign In</h1>
-        <form onSubmit={doSignIn}>
+        <h2>Sign In</h2>
+        <form className="authForm" onSubmit={doSignIn}>
           <label name='email'>Email:{`\t`}</label>
           <input
             type='text'
             name='signinEmail'
             placeholder='email' />
+            <br />
             <br />
           <label name='password'>Password:{`\t`}</label>
           <input
@@ -46,17 +47,20 @@ function Signin(){
             name='signinPassword'
             placeholder='Password' />
             <br />
-          <button type='submit'>Sign In</button>
+            <br />
+          <button className="btn btn-primary" type='submit'>Sign In</button>
         </form>
       </React.Fragment>
     );
   } else {
     return (
       <React.Fragment>
-        <h3>You are signed in as {auth.currentUser.displayName}.  Sign out?</h3>
-        <button onClick={doSignOut}>Sign out</button>
-        <br />
-        <Link to="/">Return to Map</Link>
+        <div className="authForm">
+          <h3>You are signed in as {auth.currentUser.displayName}.  Sign out?</h3>
+          <button className="btn btn-primary" onClick={doSignOut}>Sign out</button>
+          <br />
+          <Link to="/">Return to Map</Link>
+        </div>
       </React.Fragment>
     );
   }
