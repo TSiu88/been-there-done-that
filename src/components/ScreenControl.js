@@ -3,7 +3,6 @@ import SplashPage from './SplashPage';
 import TagControl from './TagPlaces/TagControl';
 import { isLoaded } from 'react-redux-firebase';
 import firebase from "firebase/app";
-//import PropTypes from 'prop-types';
 
 function ScreenControl(props){
 
@@ -13,7 +12,6 @@ function ScreenControl(props){
   const setVisibility = () => {
     if ((isLoaded(auth)) && (auth.currentUser == null)) {
       currentlyVisibleComponent = <SplashPage />;
-      //currentlyVisibleComponent = <TagControl />; // For testing w/o login
     } else if ((isLoaded(auth)) && (auth.currentUser != null)) {
       currentlyVisibleComponent = <TagControl />;
     }

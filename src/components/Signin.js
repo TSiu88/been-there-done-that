@@ -53,14 +53,13 @@ function Signin(){
   } else {
     return (
       <React.Fragment>
-        <h1>You are already signed in!</h1>
-        <Link to="/">Go to Map</Link>
-        <br />
+        <h3>You are signed in as {auth.currentUser.displayName}.  Sign out?</h3>
         <button onClick={doSignOut}>Sign out</button>
+        <br />
+        <Link to="/">Return to Map</Link>
       </React.Fragment>
     );
   }
-  
 }
 
 export default withFirestore(Signin);

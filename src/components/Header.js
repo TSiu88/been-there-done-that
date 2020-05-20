@@ -1,42 +1,40 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import firebase from "firebase/app";
-import { isLoaded } from 'react-redux-firebase';
+import { withFirestore } from 'react-redux-firebase';
 
-function Header() {
+function Header(props) {
+  const {userName} = props;
 
-  const auth = firebase.auth();
+  let userNameVisible;
+  let signInOutVisible;
+  let registerVisible;
 
-  if(isLoaded(auth) && auth.currentUser == null){
-    return(
-      <React.Fragment>
-        <h1>Been There, Done That</h1>
-        <div>
-          <h4>
-          <Link to="/">Home</Link>
-          {`\t`}|{`\t`}
-          <Link to="/signin">Sign In</Link>
-          {`\t`}|{`\t`}
-          <Link to="/register">Register</Link>
-          </h4>
-        </div>
-      </React.Fragment>
-    );
-  } else {
-    return(
-      <React.Fragment>
-        <h1>Been There, Done That</h1>
-        <div>
-          <h4>
-          <Link to="/">Home</Link>
-          {`\t`}|{`\t`}
-          <Link to="/signin">Sign Out</Link>
-          </h4>
-        </div>
-      </React.Fragment>
-    );
+  const setVisibility = () => {
+    if(props.userSignInStatus){
+      userNameVisible = <span>{userName}{`\t`}|{`\t`}</span>;
+      signInOutVisible = <Link to="/signin">Sign Out</Link>;
+      registerVisible = <span></span>;
+    } else {
+      userNameVisible = <span></span>;
+      signInOutVisible = <Link to="/signin">Sign In</Link>;
+      registerVisible = <span>{`\t`}|{`\t`}
+        <Link to="/register">Register</Link></span>;
+    }
   }
-  
-}
 
-export default Header;
+  setVisibility();
+  
+  return (
+    <React.Fragment>
+      <h1><Link to="/">Been There, Done That</Link></h1>
+      <div className="authNavBar">
+        <h4>
+          {userNameVisible}
+          {signInOutVisible}
+          {registerVisible}
+        </h4>
+      </div>
+    </React.Fragment>
+  )
+}
+export default withFirestore(Header);

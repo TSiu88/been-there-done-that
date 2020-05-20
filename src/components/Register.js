@@ -23,6 +23,7 @@ function Register(){
       console.log(error.message);
     });
   }
+  
   return (
     <React.Fragment>
       <h1>Register</h1>
