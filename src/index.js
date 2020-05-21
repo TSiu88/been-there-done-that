@@ -14,7 +14,6 @@ import thunkMiddleware from 'redux-thunk';
 
 const store = createStore(rootReducer, applyMiddleware( thunkMiddleware ));
 
-
 const rrfProps = {
   firebase,
   config: {

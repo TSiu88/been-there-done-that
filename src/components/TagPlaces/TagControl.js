@@ -11,6 +11,7 @@ import { withFirestore, isLoaded } from 'react-redux-firebase';
 import mapboxgl from 'mapbox-gl';
 import { makeApiSearchCall } from './../../actions';
 
+// Hard coded places for testing
 let places = {
   "type": "FeatureCollection",
   "features": [
@@ -62,6 +63,7 @@ let geocoder;
 let point;
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 var MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
+
 class TagControl extends React.Component {
 
   constructor(props) {
@@ -108,7 +110,7 @@ class TagControl extends React.Component {
     geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl
-      });
+    });
        
     document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
@@ -160,28 +162,28 @@ class TagControl extends React.Component {
    // Adds popups for each store to show name, type , address, distance from query point
     let popup = new mapboxgl.Popup; // Initialize a new popup
 
-  map.on('mouseenter', point, function(e) {
-     map.getCanvas().style.cursor = 'pointer'; // When the cursor enters a feature, set it to a pointer
+    map.on('mouseenter', point, function(e) {
+      map.getCanvas().style.cursor = 'pointer'; // When the cursor enters a feature, set it to a pointer
 
-     var title = '<h3>' + e.result.properties.text + '</h3>'; // Set the store name
-     var storeAddress = '<p>' + e.result.properties.address + '</p>'; // Set the store address
-    //  var obj = JSON.parse(e.features[0].properties.tilequery); // Get the feature's tilequery object (https://docs.mapbox.com/api/maps/#response-retrieve-features-from-vector-tiles)
-    //  var distance = '<p>' + (obj.distance / 1609.344).toFixed(2) + ' mi. from location' + '</p>'; // Take the distance property, convert it to miles, and truncate it at 2 decimal places
+      var title = '<h3>' + e.result.properties.text + '</h3>'; // Set the store name
+      var storeAddress = '<p>' + e.result.properties.address + '</p>'; // Set the store address
+      //  var obj = JSON.parse(e.features[0].properties.tilequery); // Get the feature's tilequery object (https://docs.mapbox.com/api/maps/#response-retrieve-features-from-vector-tiles)
+      //  var distance = '<p>' + (obj.distance / 1609.344).toFixed(2) + ' mi. from location' + '</p>'; // Take the distance property, convert it to miles, and truncate it at 2 decimal places
 
-     var lon = e.result.center[0];
-     var lat = e.result.center[1];
-     var coordinates = new mapboxgl.LngLat(lon, lat); // Create a new LngLat object (https://docs.mapbox.com/mapbox-gl-js/api/#lnglatlike)
-     var content = title + storeAddress; // All the HTML elements
+      var lon = e.result.center[0];
+      var lat = e.result.center[1];
+      var coordinates = new mapboxgl.LngLat(lon, lat); // Create a new LngLat object (https://docs.mapbox.com/mapbox-gl-js/api/#lnglatlike)
+      var content = title + storeAddress; // All the HTML elements
 
-     popup.setLngLat(coordinates) // Set the popup at the given coordinates
-       .setHTML(content) // Set the popup contents equal to the HTML elements you created
-       .addTo(map); // Add the popup to the map
-   })
+      popup.setLngLat(coordinates) // Set the popup at the given coordinates
+        .setHTML(content) // Set the popup contents equal to the HTML elements you created
+        .addTo(map); // Add the popup to the map
+    })
 
-   map.on('mouseleave', point, function() {
-     map.getCanvas().style.cursor = ''; // Reset the cursor when it leaves the point
-     popup.remove(); // Remove the popup when the cursor leaves the point
-   });
+    map.on('mouseleave', point, function() {
+      map.getCanvas().style.cursor = ''; // Reset the cursor when it leaves the point
+      popup.remove(); // Remove the popup when the cursor leaves the point
+    });
   }
 
   handleToggleListMap = () => {
@@ -304,11 +306,11 @@ class TagControl extends React.Component {
       return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} selectedPlace={this.state.placeToAdd}/>
     } else if (this.props.editTagFormVisible){
       return <EditTagForm tag = { this.state.selectedTag} onEditTag = {this.handleEditingTag} />
-    // } else if (this.state.selectedTag != null){
-    //   return <TagList 
-    //     onEditClick={this.handleEditingTag}
-    //     onDeleteClick={this.handleDeletingTag}
-    //   />
+    } else if (this.state.selectedTag != null){
+      return <TagList 
+        onEditClick={this.handleEditingTag}
+        onDeleteClick={this.handleDeletingTag}
+      />
     } else {
       return <MapSearch 
         places={this.state.places}

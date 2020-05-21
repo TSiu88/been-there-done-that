@@ -1,14 +1,3 @@
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .authNavBar {
   display: flex;
   justify-content: flex-end;
@@ -222,16 +211,6 @@ min-width: 100%;
 .mapboxgl-popup-anchor-top > .mapboxgl-popup-tip {
   border-bottom-color: #91c949;
 }
-
-/* Style marker to use custom marker image
-.marker {
-  border: none;
-  cursor: pointer;
-  height: 56px;
-  width: 56px;
-  background-image: url(marker.png);
-  background-color: rgba(0, 0, 0, 0);
-} */
 
 /* Adjust position of popup for heigh of marker */
 .mapboxgl-popup {

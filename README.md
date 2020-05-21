@@ -4,8 +4,9 @@
 <p align="center">
 <img align="center" height="150px" alt="Travel pins" src="./public/travel-pins.jpg">
 </p>
-<h4 align="center"><em>Track your personal footprint of places you've been, Initialized 05.08.2020</em>
+<h4 align="center"><em>Track your personal footprint of places you've been</em>
 </h4>
+<h4 align="center">Initialized: 05.08.2020, Last Updated: 05.21.2020</h4>
 <h4 align="center"><em>By: Tiffany Siu</em></h4>
 
 <!-- [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) -->
@@ -31,7 +32,6 @@
     <img src="https://img.shields.io/badge/-LinkedIn-linkedin.svg?style=flat&logo=linkedin&colorB=0077b5">
   </a>
 </p>
-
 
 ---
 ## :book:Table of Contents

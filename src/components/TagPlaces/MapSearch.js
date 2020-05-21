@@ -8,7 +8,6 @@ function MapSearch(props){
       <div className="mapSidebar">
         <h2 className="mapHeading">Map Search</h2>
         <div id="geocoder" className="geocoder"></div>
-        {/* <div id="listings" className="listings"></div> */}
         <div id="listings" className="listings">
           <PlaceList 
             places={props.places} 

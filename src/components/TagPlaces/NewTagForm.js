@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReusableForm from './ReusableForm';
 import { useFirestore } from 'react-redux-firebase'
-import { auth } from 'firebase';
 import firebase from "firebase/app";
-import { withFirestore, isLoaded } from 'react-redux-firebase';
+import { withFirestore } from 'react-redux-firebase';
 
 function NewTagForm(props){
 
@@ -14,7 +13,10 @@ function NewTagForm(props){
     event.preventDefault();
     props.onNewTagCreation();
 
-    let coordinateObj = {0:props.selectedPlace.geometry.coordinates[0], 1:props.selectedPlace.geometry.coordinates[1]};
+    let coordinateObj = {
+      0:props.selectedPlace.geometry.coordinates[0], 
+      1:props.selectedPlace.geometry.coordinates[1]
+    };
     
     firestore.collection('tags').add(
       {
