@@ -58,9 +58,9 @@ class TagControl extends React.Component {
       });
        
       document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-  }
+  // }
 
-  componentDidUpdate() {
+  // componentDidUpdate() {
     geocoder.on('result', function(data) { // When the geocoder returns a result
       let point = data.result.center; // Capture the result coordinates
 
@@ -72,9 +72,9 @@ class TagControl extends React.Component {
       // Create new variable for Tilequery API request
       query = 'https://api.mapbox.com/v4/' + tileset + '/tilequery/' + point[0] + ',' + point[1] + '.json?radius=' + radius + '&limit= ' + limit + '&dedupe&layers=poi_label&access_token=' + mapboxgl.accessToken;
 
-      this.makeApiSearchCall();
+      //this.makeApiSearchCall;
 
-      //Make the Tilequery API call with ajax
+      //Make the Tilequery API call
       // makeApiSearchCall = () => {
       //   fetch(query).then(response => response.json())
       //   .then(
@@ -222,6 +222,7 @@ class TagControl extends React.Component {
       />
     } else {
       return <MapSearch 
+        searchResults={this.makeApiSearchCall}
         placeToAdd={this.handleToggleAddTagForm}
         showPlaceDetails={this.handleChangingSelectedPlace}
       />;
