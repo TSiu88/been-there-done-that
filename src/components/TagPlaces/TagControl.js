@@ -185,6 +185,15 @@ class TagControl extends React.Component {
   }
 
   handleToggleListMap = () => {
+    if(this.state.selectedPlace != null){
+      this.setState({
+        mapSearchVisible: true,
+        tagListVisible: false,
+        addTagFormVisible: false,
+        selectedPlace: null
+      });
+      buttonText="Map Search";
+    }
     if(this.state.addTagFormVisible){
       this.setState({
         mapSearchVisible: true,
@@ -197,6 +206,7 @@ class TagControl extends React.Component {
         mapSearchVisible: false,
         tagListVisible: true,
         addTagFormVisible: false,
+        selectedPlace: null
       });
       buttonText="Map Search";
     } else {
@@ -204,6 +214,7 @@ class TagControl extends React.Component {
         mapSearchVisible: true,
         tagListVisible: false,
         addTagFormVisible: false,
+        selectedPlace: null
       });
       buttonText="My Tagged Places";
     }
@@ -243,7 +254,7 @@ class TagControl extends React.Component {
   }
 
   handleChangingSelectedPlace = (id) => {
-    const selectedPlace = this.state.masterPlaceList.filter(place => place.id === id)[0];
+    const selectedPlace = this.state.places.filter(place => place.id === id)[0];
     this.setState({selectedPlace: selectedPlace});
   }
 

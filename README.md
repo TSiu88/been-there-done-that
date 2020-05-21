@@ -62,11 +62,24 @@ Been There, Done That is a web application that tracks your personal footprint o
 The purpose of this project is to help people keep track of places they’ve been and things that they’ve seen.  Whether it’s as simple as the restaurants they tried in the area, to major landmarks from exotic trips, it would allow people to tag a place with when it occurred and leave a note for themselves as a reminder of whatever information they want to know about a place.
 
 ### Notable Features
-This project is expected to use mapbox API to display a map with custom markers and popups that can be added or removed from a personal list of tagged places.
+This project is uses mapbox geocoding API, React front end, and Firebase back end.  This mix of technologies is not often used so there is much less documentation for using React with mapbox.  It is expected to use multiple mapbox APIs (Geocoding and Tilequery) to display a map with custom markers and popups that can be added or removed from a personal list of tagged places in the future.
+
+This project also faced many struggles.  There is less documentation on using React with mapbox than in other languages so it was difficult to figure out how to design components, what syntax to use for different functionalities, and less examples were available. The documentation also was difficult to parse through for the different APIs and understanding what each API did was not very clear.  The design of the component structure was also more complex so it was more difficult to get the components to work together easily.
 
 ### Known Bugs
 
-_There are currently no known bugs in this program_
+  - [ ] Search box only returns a single point that does not appear in the list of found places.  Places are currently hard-coded in for testing.
+  - [ ] Search box response not as a valid geoJSON object
+  - [ ] Search box does not prioritize currently visible map for search results
+  - [ ] Toggling between Map Search and Tagged List does not re-render map to be visible
+  - [ ] Map does not have custom markers highlighting points of interest or popups currently working
+  - [ ] Tagged places does not have editing or remove functionality yet
+  - [ ] Place details does not have button functionality to go back yet
+  - [ ] Toggling between Map Search and Add Form toggles between Add Form and Tagged places instead
+  - [ ] Authorization for only being able to view, edit, add, and delete tags privately not implemented yet
+  - [ ] Map size not responsive vertically to window size
+
+<!-- _There are currently no known bugs in this program_ -->
 
 ## Setup/Installation Requirements
 
@@ -76,16 +89,17 @@ _There are currently no known bugs in this program_
 * _Webpack_
 * _Node.js_
 * _NPM_
-* _API KEY_
+* _Mapbox API KEY_
 
 ### Instructions
 
 1. Download and install Node.js from the [official website](https://nodejs.org/en/download/)
 2. Clone the [repository](https://github.com/TSiu88/been-there-done-that.git) from my [GitHub page](https://github.com/TSiu88)
 3. Use a command line/Bash to move to the project directory with `cd insert-project-directory-name-here`
-4. Run `npm install` to get all dependencies. 
-5. Run `npm run start` to start up the program 
-6. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. Sign up for an API key with [Mapbox](https://www.mapbox.com/) and save the API Key given in a `.env` file as `REACT_APP_MAPBOX_ACCESS_TOKEN = insert-access-token-api-key-here`
+5. Run `npm install` to get all dependencies. 
+6. Run `npm run start` to start up the program 
+7. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### Other Technologies Used
 
@@ -95,17 +109,24 @@ _There are currently no known bugs in this program_
 * _Javascript_
 * _React_
 * _Redux_
-* _Firestore_
+* _[Firestore](https://cloud.google.com/firestore)_
+* _[Mapbox Geocoding API](https://docs.mapbox.com/api/search/#geocoding)_
 * _Bootstrap 4.4.1_
 * _ESLint_
 * _Babel_
 * _Jest_
 * _Markdown_
 * _Visual Studio Code_
-* _Mapbox API_
+* _[Trello](https://trello.com)_
+* _[Draw.io](https://app.diagrams.net/)_
+* _[Figma](https://www.figma.com)_
+
 
 #### Planned with Future Product
 * _Custom markers in mapbox_
+* _Mapbox popups with info on map_
+* _Mapbox Tilequery API for search results viewable on map_
+* _Mapbox Tilesets API to upload a personal tileset layer to view tagged locations on a map_
 * _Semantic UI for more fancy styling_
 * _Share buttons to connect with social media_
 * _Share a tagged place with note/snapshot using a paid SMS service_
@@ -126,18 +147,20 @@ The product will only allow editing, deleting, and viewing tagged places from th
 ### Minimal Viable Product
 
 * This application will be a web application
-* It will use a Places of Interest API for place data (mapbox)
+* It will use a Geocoding API for place data (mapbox)
 * Data will persist in a firebase database
 * Have user authentication/authorization so users can log in and be only able to see their own data
 * Users will be able to tag a places as visited or add a private note about a place that are visible only to themselves
 
 ### Future Product Roadmap
 
+* Be able to edit, delete, group, or otherwise alter existing tags
 * Be able to group/categorize places tagged with premade or user made categories
 * Be able to make personal lists of places separate of categories
 * Be able to see places you’ve been before on the map as a pin
 * Be able to sort/view places by proximity to current location/input location, by date, by category, etc.
 * Have both public and private note options
+* Have admin authorization to be able to view all tags for all users
 * Have a list of most popular sites or least possible sites tagged locally or in a searched location for recommendations
 * Be able to create a phone app version which works with android and apple to be used mobily 
 * Clicking on places pops up other information like address, phone, hours, pics, reviews, etc. as well as the button to check that you’ve been there
@@ -169,61 +192,58 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 ### Specifications
 
-<!-- * _List of features the program should do, from simplest to more complex, handling all possible cases.  Can do as text or put in table, with example input and output -->
-
-<!-- <details>
+<details>
   <summary>Click to expand to view Specifications</summary>
 
 | Specification | Input | Output |
 | :-------------     | :------------- | :------------- |
-| The program displays welcome message and menu with prices | Application start | Welcome message and menu displayed |
-| The program displays special deals in readable format | Application start | Special deals displayed ("Buy 2, get 1 free" "3 for $5") |
-| The program takes input of user that is not an integer, then assume 0 ordered | Bread="aaa", Pastry="" | Bread=0, Pastry=0 |
-| The program takes number of loaves of bread and pastries and displays totals | Bread=4, Pastry=4 | Bread=$20, Pastry=$8, Total=$28 |
-| If input qualifies for special deals, costs calculated using discounted price | Bread=3, Pastry=3 | Bread=$10, Pastry=$5, Total=$15 |
+| The program displays a splash screen with basic info and features if a user is not logged in and on the home page | Application start | Splash page and features displayed |
+| The program has the ability to log in or register for an account and sign out once logged in | User uses authentication features | Log in/out shown, able to view rest of application |
+| The program has a map with search functionality for places | On Map Search view | Map with search functionality and list of places for search results displayed |
+| The program has a list of tagged places added that has buttons to edit or delete existing tags | Navigate to Tagged Places List | Places previously tagged with info and buttons to edit or delete visible |
+| Places can be selected from the search result listing and added to the tagged places list | Place add form submitted | Place appears on the "My Tagged Places" list |
 
-</details> -->
+</details>
 
 ### User Stories
-<!-- <details>
-  <summary>Click to expand to view User Stories </summary> -->
 
-<!-- * As a scheduler, I want to be able to organize nurses vacation schedules without much paperwork so that I can be more efficient.
-* As a scheduler, I want to see a list of requests with the overlapping dates and the nurses that sent in the requests organized by priority so I can see which staff member should have priority in getting the request approved. -->
+* As a user, I want to be able to keep track of where I've been and be able to edit my saved places so that I can easily alter my own data in the system and visualize where I've been.
 
-<!-- * Give stories for people who will use this project and what they'd want it to do.  Can include customers/end users, programmers that maintain code, etc. Use "As a <job title/type of user/etc>, I want to...<what want program to achieve>... so that I can...<reason>.-->
-<!-- </details> -->
+* As a user, I want to be able to organize my tags/notes by categories, groups, location, and other criteria so that I can easily find the relevant information of if I've been somewhere or not.
+
+* As a user, I want to be able to search for places of interest and select it from search results so that I can add the place to my saved tags.
+
+* As a user, I want to be able to have my tags/notes kept private and only shared when I wish them to so that I can keep my information private and not need to write a comprehensive review on a place.
+
+* As a user, I want to have this application become available for mobile platforms so that I can use it on the go using a phone's GPS for location data.
 
 ## Screenshots
 
-<!-- _Here is a snippet of what the input looks like:_
+_Here is a preview of what the map search screen looks like:_
 
-![Snippet of input fields](img/snippet1.png)
+<img src="./public/snippet1.png" alt="Map Search Screen">
 
-_Here is a preview of what the output looks like:_
 
-![Snippet of output box](img/snippet2.png) -->
+_Here is a preview of what the tagged places looks like:_
 
-<!-- <details>
+<img src="./public/snippet2.png" alt="My Tagged Places">
+
+<details>
   <summary>Expand to view More Screenshots </summary>
 
-  ![Snippet of input fields](img/snippet3.png)
+  _Here is a snippet of what adding a tag looks like:_
+
+  <img src="./public/snippet3.png" alt="Adding Tag Snippet">
 
 
-</details> -->
+  _Here is a snippet of what the splash page looks like:_
 
-<!-- _{Show pictures using ![alt text](image.jpg), show what library does as concisely as possible but don't need to explain how project solves problem from `code`_ -->
+  <img src="./public/snippet4.png" alt="Splash Page">
+
+</details>
 
 ## Testing
-_Tests are done through Jest along with using ESLint and are run from the command line prompt with `npm test`._
-
-<!-- _Some example tests:_
-
-![Snippet of an example test](img/tester1.png)
-
-![Snippet of an example result](img/tester2.png) -->
-
-<!-- _describe and show how to run tests with `code` examples}_ -->
+_Tests are done through Jest along with using ESLint and are run from the command line prompt with `npm test`.  Some were done initially but most removed with the refactoring to use Firebase._
 
 ## Support and contact details
 

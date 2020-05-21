@@ -5,7 +5,7 @@ function Tag(props){
   return(
     <React.Fragment>
       <hr />
-      <h5>Tagged?: {props.tagStatus.toString()} - {props.dateCreated.toString()}</h5>
+      <h5>Tagged?: {props.tagStatus.toString()} - {props.dateCreated.toDate().toString()}</h5>
       <h3>{props.nickName} - ({props.placeName})</h3>
       <h4>{props.address} | {props.coordinates[0]}, {props.coordinates[1]}</h4>
       <p>{props.description}</p>
@@ -24,7 +24,7 @@ Tag.propTypes = {
   nickName: PropTypes.string,
   placeName: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
-  coordinates: PropTypes.string.isRequired,
+  coordinates: PropTypes.object,
   description: PropTypes.string,
   personalNote: PropTypes.string
 }

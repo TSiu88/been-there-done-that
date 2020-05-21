@@ -16,7 +16,6 @@ function TagList(props){
         <hr />
         <h2>TAG LIST</h2>
         {tags.map((tag) => {
-          console.log("TAG", tag);
           return <Tag
             tagStatus={tag.tagStatus}
             dateCreated={tag.dateCreated}
