@@ -199,6 +199,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 <p align="center">
   <img src="./public/data-structure.png">
 </p>
+
 ### :memo:Specifications
 
 <details>
