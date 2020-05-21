@@ -180,7 +180,9 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 ### :classical_building:Component Diagram/Wireframe
 
-<img src="./public/component-diagram-v3.png">
+<p align="center">
+  <img src="./public/component-diagram-v3.png">
+</p>
 
 <details>
   <summary>Click to expand to view Initial Wireframes/Prototypes</summary>
@@ -194,8 +196,9 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 ### :file_cabinet:Database Structure
 
-<img src="./public/data-structure.png">
-
+<p align="center">
+  <img src="./public/data-structure.png">
+</p>
 ### :memo:Specifications
 
 <details>
