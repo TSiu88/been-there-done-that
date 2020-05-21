@@ -1,6 +1,9 @@
 <h1 align="center">
   <a href="https://github.com/TSiu88/been-there-done-that">Been There, Done That</a>
 </h1>
+<p align="center">
+<img align="center" height="150px" alt="Travel pins" src="./public/travel-pins.jpg">
+</p>
 <h4 align="center"><em>Track your personal footprint of places you've been, Initialized 05.08.2020</em>
 </h4>
 <h4 align="center"><em>By: Tiffany Siu</em></h4>
@@ -149,8 +152,8 @@ The product will only allow editing, deleting, and viewing tagged places from th
 * This application will be a web application
 * It will use a Geocoding API for place data (mapbox)
 * Data will persist in a firebase database
-* Have user authentication/authorization so users can log in and be only able to see their own data
-* Users will be able to tag a places as visited or add a private note about a place that are visible only to themselves
+* Have user authentication/authorization so users must log in to use this application
+* Users will be able to tag a places as visited or add a private note about a place
 
 ### Future Product Roadmap
 
@@ -160,6 +163,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 * Be able to see places you’ve been before on the map as a pin
 * Be able to sort/view places by proximity to current location/input location, by date, by category, etc.
 * Have both public and private note options
+* Have user authorization/authentication to only be able to view, edit, add, or delete tags/notes that they own
 * Have admin authorization to be able to view all tags for all users
 * Have a list of most popular sites or least possible sites tagged locally or in a searched location for recommendations
 * Be able to create a phone app version which works with android and apple to be used mobily 
