@@ -36,42 +36,42 @@
 ---
 ## Table of Contents
 1. [About the Project](#about-the-project)
-    - [Description](#description)
-    - [Notable Features](#notable-features)
-    - [Known Bugs](#known-bugs)
+    - [Description](#:book:description)
+    - [Notable Features](#:sparkles:notable-features)
+    - [Known Bugs](#:microbe:known-bugs)
 2. [Setup/Installation Requirements](#setup/installation-requirements)
-    - [Requirements to Run](#requirements-to-run)
-    - [Instructions](#instructions)
-    - [Other Technologies Used](#other-technologies-used)
+    - [Requirements to Run](#:toolbox:requirements-to-run)
+    - [Instructions](#:gear:instructions)
+    - [Other Technologies Used](#:desktop_computer:other-technologies-used)
 3. [Scope](#scope)
-    - [Use Cases](#use-cases)
-    - [Minimal Viable Product](#minimal-viable-product)
-    - [Future Product Roadmap](#future-product-roadmap)
-    - [Specifications](#specifications)
-    - [User Stories](#user-stories)
-    - [Component Diagram/Wireframe](#component-diagram/wireframe)
-    - [Database Structure](#database-structure)
-4. [Screenshots](#screenshots)
-5. [Testing](#testing)
-6. [Support and Contact Details](#support-and-contact-details)
-7. [License](#license)
+    - [Use Cases](#:writing_hand:use-cases)
+    - [Minimal Viable Product](#:compass:minimal-viable-product)
+    - [Future Product Roadmap](#:world_map:future-product-roadmap)
+    - [Component Diagram/Wireframe](#:classical_building:component-diagram/wireframe)
+    - [Database Structure](#:file_cabinet:database-structure)
+    - [Specifications](#:memo:specifications)
+    - [User Stories](#:speech_balloon:user-stories)
+4. [Screenshots](#:framed_picture:screenshots)
+5. [Testing](#:test_tube:testing)
+6. [Support and Contact Details](#:mailbox:support-and-contact-details)
+7. [License](#:balance_scale:license)
 ---
 ## About the Project
 
-### Description
+### :book:Description
 
 Been There, Done That is a web application that tracks your personal footprint of where you've been before by being able to tag if you've been somewhere and add private notes to a place of interest on a map.
 
 The purpose of this project is to help people keep track of places they’ve been and things that they’ve seen.  Whether it’s as simple as the restaurants they tried in the area, to major landmarks from exotic trips, it would allow people to tag a place with when it occurred and leave a note for themselves as a reminder of whatever information they want to know about a place.
 
-### Notable Features
+### :sparkles:Notable Features
 This project is uses mapbox geocoding API, React front end, and Firebase back end.  This mix of technologies is not often used so there is much less documentation for using React with mapbox. It is expected to use multiple mapbox APIs (Geocoding and Tilequery) to display a map with custom markers and popups that can be added or removed from a personal list of tagged places in the future.
 
 This project also uses a mix of technologies that I have not had a lot of experience in previously or are newly learned technologies that I haven't had as much practice in so I wanted to challenge myself with technologies I feel like I am not as strong in.
 
 This project also faced many struggles.  There is less documentation on using React with mapbox than in other languages so it was difficult to figure out how to design components, what syntax to use for different functionalities, and less examples were available to reference. The documentation also was difficult to parse through for the different APIs and understanding what each API did was not very clear.  The design of the component structure was also more complex so it was more difficult to get the components to work together easily and both React and maps were difficult to combine since they both are trying to update the DOM.  However I will try to continue working on this project to find solutions or work around these issues.
 
-### Known Bugs
+### :microbe:Known Bugs
 
   - [ ] Search box only returns a single point that does not appear in the list of found places.  Places are currently hard-coded in for testing.
   - [ ] Search box response not as a valid geoJSON object
@@ -88,7 +88,7 @@ This project also faced many struggles.  There is less documentation on using Re
 
 ## Setup/Installation Requirements
 
-### Requirements to Run
+### :toolbox:Requirements to Run
 
 * _Web Browser_
 * _Webpack_
@@ -96,7 +96,7 @@ This project also faced many struggles.  There is less documentation on using Re
 * _NPM_
 * _Mapbox API KEY_
 
-### Instructions
+### :gear:Instructions
 
 1. Download and install Node.js from the [official website](https://nodejs.org/en/download/)
 2. Clone the [repository](https://github.com/TSiu88/been-there-done-that.git) from my [GitHub page](https://github.com/TSiu88)
@@ -106,7 +106,7 @@ This project also faced many struggles.  There is less documentation on using Re
 6. Run `npm run start` to start up the program 
 7. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-### Other Technologies Used
+### :desktop_computer:Other Technologies Used
 
 #### MVP
 * _HTML_
@@ -140,7 +140,7 @@ This project also faced many struggles.  There is less documentation on using Re
 
 ## Scope
 
-### Use Cases
+### :writing_hand:Use Cases
 Users are anyone who would like help remembering where they’ve been from world travels to local businesses.
 
 The product focuses on private notes as memory reminders and does not focus on reviews or sharing information as its main function, though it may be possible in the future.
@@ -149,7 +149,7 @@ The product would allow all places to be tagged from businesses to points of int
 
 The product will only allow editing, deleting, and viewing tagged places from the person who owns it and only viewable if shared by the person.
 
-### Minimal Viable Product
+### :compass:Minimal Viable Product
 
 * This application will be a web application
 * It will use a Geocoding API for place data (mapbox)
@@ -157,7 +157,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 * Have user authentication/authorization so users must log in to use this application
 * Users will be able to tag a places as visited or add a private note about a place
 
-### Future Product Roadmap
+### :world_map:Future Product Roadmap
 
 * Be able to edit, delete, group, or otherwise alter existing tags
 * Be able to group/categorize places tagged with premade or user made categories
@@ -178,7 +178,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 * Trip planner/trip maker to route between sites/tour between sites in a category/list
 
 
-### Component Diagram/Wireframe
+### :classical_building:Component Diagram/Wireframe
 
 <img src="./public/component-diagram-v3.png">
 
@@ -192,11 +192,11 @@ The product will only allow editing, deleting, and viewing tagged places from th
   <img src="./public/initial-wireframe1.png">
 </details>
 
-### Database Structure
+### :file_cabinet:Database Structure
 
 <img src="./public/data-structure.png">
 
-### Specifications
+### :memo:Specifications
 
 <details>
   <summary>Click to expand to view Specifications</summary>
@@ -211,7 +211,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 </details>
 
-### User Stories
+### :speech_balloon:User Stories
 
 * As a user, I want to be able to keep track of where I've been and be able to edit my saved places so that I can easily alter my own data in the system and visualize where I've been.
 
@@ -223,7 +223,7 @@ The product will only allow editing, deleting, and viewing tagged places from th
 
 * As a user, I want to have this application become available for mobile platforms so that I can use it on the go using a phone's GPS for location data.
 
-## Screenshots
+## :framed_picture:Screenshots
 
 _Here is a preview of what the map search screen looks like:_
 
@@ -248,15 +248,15 @@ _Here is a preview of what the tagged places looks like:_
 
 </details>
 
-## Testing
+## :test_tube:Testing
 _Tests are done through Jest along with using ESLint and are run from the command line prompt with `npm test`.  Some were done initially but most removed with the refactoring to use Firebase._
 
-## Support and contact details
+## :mailbox:Support and contact details
 
 _If there are any question or concerns please contact me at my [email](mailto:tsiu88@gmail.com). Thank you._
 
-## License
+## :balance_scale:License
 
 *This software is licensed under the MIT license*
 
-Copyright (c) 2020 **_Tiffany Siu_**
+Copyright (c) 2020 **_Tiffany Siu_** :octocat:
