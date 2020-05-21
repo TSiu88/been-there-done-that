@@ -34,9 +34,9 @@
 
 
 ---
-## Table of Contents
+## :book:Table of Contents
 1. [About the Project](#file_folderabout-the-project)
-    - [Description](#bookdescription)
+    - [Description](#pencil2description)
     - [Notable Features](#sparklesnotable-features)
     - [Known Bugs](#microbeknown-bugs)
 2. [Setup/Installation Requirements](#wrenchsetup/installation-requirements)
@@ -58,7 +58,7 @@
 ---
 ## :file_folder:About the Project
 
-### :book:Description
+### :pencil2:Description
 
 Been There, Done That is a web application that tracks your personal footprint of where you've been before by being able to tag if you've been somewhere and add private notes to a place of interest on a map.
 
