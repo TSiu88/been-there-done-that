@@ -11,6 +11,52 @@ import { withFirestore, isLoaded } from 'react-redux-firebase';
 import mapboxgl from 'mapbox-gl';
 import { makeApiSearchCall } from './../../actions';
 
+let places = {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "id": 0,
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3492345, 
+          47.620425999999995 
+        ]
+      },
+      "properties": {
+        "name": "Space Needle",
+        "type": "monument, landmark, historic",
+        "address": "400 Broad St",
+        "city": "Seattle",
+        "country": "United States",
+        "postalCode": "98109",
+        "state": "WA"
+      }
+    },
+    {
+      "id": 1,
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.4289919435978,
+          37.806283149631255
+        ]
+      },
+      "properties": {
+        "name": "Fort Mason",
+        "type": "National Park",
+        "address": "201 Fort Mason",
+        "city": "San Francisco",
+        "country": "United States",
+        "postalCode": "94109",
+        "state": "CA"
+      }
+    },
+  ]
+};
+
 let buttonText = "My Tagged Places";
 let geocoder;
 let point;
@@ -30,7 +76,8 @@ class TagControl extends React.Component {
       isLoaded: false,
       lng: -122,
       lat: 47.5,
-      zoom: 7
+      zoom: 7,
+      places: places.features
     };
   }
 
@@ -138,22 +185,31 @@ class TagControl extends React.Component {
   }
 
   handleToggleListMap = () => {
-    if (this.state.mapSearchVisible){
+    if(this.state.addTagFormVisible){
+      this.setState({
+        mapSearchVisible: true,
+        tagListVisible: false,
+        addTagFormVisible: false,
+      });
+      buttonText="Map Search";
+    } else if (this.state.mapSearchVisible){
       this.setState({
         mapSearchVisible: false,
-        tagListVisible: true
+        tagListVisible: true,
+        addTagFormVisible: false,
       });
       buttonText="Map Search";
     } else {
       this.setState({
         mapSearchVisible: true,
-        tagListVisible: false
+        tagListVisible: false,
+        addTagFormVisible: false,
       });
       buttonText="My Tagged Places";
     }
   }
 
-  handleToggleAddTagForm = () => {
+  handleToggleAddTagForm = (id) => {
     if (this.state.selectedTag != null){
       this.setState({
         selectedTag: null,
@@ -162,6 +218,13 @@ class TagControl extends React.Component {
         mapSearchVisible: true
       });
     } else {
+      const selectedPlace = this.state.places.filter(place => place.id === id)[0];
+      this.setState({
+        placeToAdd: selectedPlace,
+        addTagFormVisible: true,
+        mapSearchVisible: false,
+        tagListVisible: false
+      });
       const { dispatch } = this.props;
       const action = a.toggleForm();
       dispatch(action);
@@ -169,15 +232,20 @@ class TagControl extends React.Component {
   }
 
   handleAddingNewTag = () => {
+    this.setState({
+      addTagFormVisible: false,
+      mapSearchVisible: true,
+      tagListVisible: false
+    });
     const { dispatch } = this.props;
     const action = a.toggleAddForm();
     dispatch(action);
   }
 
-  // handleChangingSelectedPlace = (id) => {
-  //   const selectedPlace = this.state.masterPlaceList.filter(place => place.id === id)[0];
-  //   this.setState({selectedPlace: selectedPlace});
-  // }
+  handleChangingSelectedPlace = (id) => {
+    const selectedPlace = this.state.masterPlaceList.filter(place => place.id === id)[0];
+    this.setState({selectedPlace: selectedPlace});
+  }
 
   handleChangingSelectedTag = (id) => {
     this.props.firestore.get({collection: 'tags', doc: id}).then((tag) => {
@@ -222,7 +290,7 @@ class TagControl extends React.Component {
     } else if (this.state.selectedPlace != null){
       return <PlaceDetail place = {this.state.selectedPlace} />
     } else if (this.props.addTagFormVisible){
-      return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} />
+      return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} selectedPlace={this.state.placeToAdd}/>
     } else if (this.props.editTagFormVisible){
       return <EditTagForm tag = { this.state.selectedTag} onEditTag = {this.handleEditingTag} />
     // } else if (this.state.selectedTag != null){
@@ -232,6 +300,7 @@ class TagControl extends React.Component {
     //   />
     } else {
       return <MapSearch 
+        places={this.state.places}
         searchResults={this.makeApiSearchCall}
         placeToAdd={this.handleToggleAddTagForm}
         showPlaceDetails={this.handleChangingSelectedPlace}

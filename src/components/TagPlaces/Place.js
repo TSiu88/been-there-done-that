@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 function Place(props){
   return(
     <React.Fragment>
-      <button className="btn btn-secondary" onClick = {() => {props.whenTaggingClick(props.id)}}>Add Tag</button>
       <hr />
+      <button className="btn btn-secondary" onClick = {() => {props.whenTaggingClick(props.id)}}>Add Tag</button>
       <div onClick={() => {props.whenClickPlace(props.id)}}>
         <h3>{props.placeName}</h3>
         <h4>{props.address}</h4>

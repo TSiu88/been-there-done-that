@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 function ReusableForm(props){
   return (
@@ -8,7 +9,7 @@ function ReusableForm(props){
         <form onSubmit={props.formSubmissionHandler}>
           <h2>{props.formType}</h2>
           <div>
-            <h4>{props.placeName} | {props.coordinates}</h4>
+            <h4>{props.place.properties.name} | {props.place.properties.address}</h4>
           </div>
           <div>
             <label name='nickName'>Nickname (optional): </label>
@@ -30,6 +31,7 @@ function ReusableForm(props){
           </div>
           <button type='submit'>Submit</button>
         </form>
+        <Link to="/">Cancel</Link>
       </div>
     </React.Fragment>
   );

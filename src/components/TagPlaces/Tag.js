@@ -7,7 +7,7 @@ function Tag(props){
       <hr />
       <h5>Tagged?: {props.tagStatus.toString()} - {props.dateCreated.toString()}</h5>
       <h3>{props.nickName} - ({props.placeName})</h3>
-      <h4>{props.address} | {props.coordinates}</h4>
+      <h4>{props.address} | {props.coordinates[0]}, {props.coordinates[1]}</h4>
       <p>{props.description}</p>
       <p>Note: {props.personalNote}</p>
       <button className="btn btn-secondary" onClick = {() => {props.whenEditClick(props.id)}}>Edit</button>

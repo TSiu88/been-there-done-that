@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReusableForm from './ReusableForm';
 import { useFirestore } from 'react-redux-firebase'
 import { auth } from 'firebase';
+import firebase from "firebase/app";
+import { withFirestore, isLoaded } from 'react-redux-firebase';
 
 function NewTagForm(props){
 
@@ -12,15 +14,17 @@ function NewTagForm(props){
     event.preventDefault();
     props.onNewTagCreation();
 
-    return firestore.collection('tags').add(
+    let coordinateObj = {0:props.selectedPlace.geometry.coordinates[0], 1:props.selectedPlace.geometry.coordinates[1]};
+    
+    firestore.collection('tags').add(
       {
-        userId: auth.currentUser.uid,
+        userId: firebase.auth().currentUser.uid,
         tagStatus: true,
         nickName: event.target.nickName.value,
-        placeName: "place name",
-        description: "tester place desc",
-        address: "123 Street",
-        coordinates: "xxx,yyy",
+        placeName: props.selectedPlace.properties.name,
+        description: props.selectedPlace.properties.type,
+        address: props.selectedPlace.properties.address,
+        coordinates: coordinateObj,
         personalNote: event.target.personalNote.value,
         dateCreated: firestore.FieldValue.serverTimestamp()
       }
@@ -32,6 +36,7 @@ function NewTagForm(props){
       <ReusableForm
         formSubmissionHandler={addTagToFirestore}
         formType="Add New Tag"
+        place={props.selectedPlace}
       />
     </React.Fragment>
   );
@@ -41,4 +46,4 @@ NewTagForm.propTypes = {
   onNewTagCreation: PropTypes.func
 }
 
-export default NewTagForm;
+export default withFirestore(NewTagForm);
