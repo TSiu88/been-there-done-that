@@ -5,7 +5,7 @@ import ScreenControl from './ScreenControl';
 import Signin from "./Signin";
 import Register from "./Register";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { withFirestore } from 'react-redux-firebase';
+import { withFirestore, isLoaded } from 'react-redux-firebase';
 import firebase from 'firebase';
 
 function App() {

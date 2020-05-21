@@ -3,13 +3,14 @@ import Place from './Place';
 import PropTypes from 'prop-types';
 
 function PlaceList(props){
+  const { onTaggingClick, onDetailsClick } = props;
   return(
     <React.Fragment>
       <hr />
       {Object.values(props.places).map((place) => {
         return <Place 
-          whenTaggingClick={place.onTaggingClick}
-          whenClickPlace={place.onDetailsClick}
+          whenTaggingClick={onTaggingClick}
+          whenClickPlace={onDetailsClick}
           placeName={place.placeName}
           address={place.address}
           id={place.id}

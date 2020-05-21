@@ -9,10 +9,11 @@ import { connect } from 'react-redux';
 import * as a from './../../actions';
 import { withFirestore, isLoaded } from 'react-redux-firebase';
 import mapboxgl from 'mapbox-gl';
+import { makeApiSearchCall } from './../../actions';
 
 let buttonText = "My Tagged Places";
 let geocoder;
-let query;
+let point;
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 var MapboxGeocoder = require('@mapbox/mapbox-gl-geocoder');
 class TagControl extends React.Component {
@@ -35,6 +36,11 @@ class TagControl extends React.Component {
 
   // Initialize map with component did mount to render after element containing map created
   componentDidMount() {
+    const { dispatch } = this.props;
+
+    // Add marker on result
+    var marker = new mapboxgl.Marker({'color': '#008000'}); // Create a new green marker
+
     const map = new mapboxgl.Map({
       container: "map", //map container reference where to render map
       style: 'mapbox://styles/mapbox/streets-v11',
@@ -57,75 +63,79 @@ class TagControl extends React.Component {
       mapboxgl: mapboxgl
       });
        
-      document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-  // }
+    document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 
-  // componentDidUpdate() {
     geocoder.on('result', function(data) { // When the geocoder returns a result
-      let point = data.result.center; // Capture the result coordinates
+      point = data.result.center; // Capture the result coordinates
+      marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
 
-      //Add Tilequery API call variable setting here
-      const tileset = 'mapbox.mapbox-streets-v8'; // replace this with the ID of the tileset
-      const radius = 1609; // 1609 meters is roughly equal to one mile
-      const limit = 10; // The maximum amount of results to return
-
-      // Create new variable for Tilequery API request
-      query = 'https://api.mapbox.com/v4/' + tileset + '/tilequery/' + point[0] + ',' + point[1] + '.json?radius=' + radius + '&limit= ' + limit + '&dedupe&layers=poi_label&access_token=' + mapboxgl.accessToken;
-
-      //this.makeApiSearchCall;
-
-      //Make the Tilequery API call
-      // makeApiSearchCall = () => {
-      //   fetch(query).then(response => response.json())
-      //   .then(
-      //     (jsonifiedResponse) => {
-      //       this.setState({
-      //         isLoaded: true,
-      //         searchResults: jsonifiedResponse.results
-      //       });
-      //     })
-      //     .catch((error) => {
-      //       this.setState({
-      //         isLoaded: true,
-      //         error
-      //       });
-      //     });
-      // }
-        console.log(data); // Shows results from search
-  //       // Code from the next step will go here
-  //       map.getSource('tilequery').setData(data);
-  //     })
-
-  //     marker.setLngLat(point).addTo(map); // Add the marker to the map at the result coordinates
-
-  //   });
-
-  //   // Add markers to found results of Tilequery API call
-  //   map.addSource('tilequery', { // Add a new source to the map style: https://docs.mapbox.com/mapbox-gl-js/api/#map#addsource
-  //     type: "geojson",
-  //     data: {
-  //       "type": "FeatureCollection",
-  //       "features": []
-  //     }
+      dispatch(makeApiSearchCall(data));
+      console.log("DATA", data); // Shows results from search
+      map.getSource('tilequery').setData(data); //ERROR: undefined
     });
-  }
 
-  makeApiSearchCall = () => {
-    fetch(query).then(response => response.json())
-    .then(
-      (jsonifiedResponse) => {
-        this.setState({
-          isLoaded: true,
-          searchResults: jsonifiedResponse.results
-        });
-      })
-      .catch((error) => {
-        this.setState({
-          isLoaded: true,
-          error
-        });
+    // Add markers to found results of Tilequery API call
+    map.on('load', function() {
+    
+      map.addSource('tilequery', { // Add a new source to the map style: https://docs.mapbox.com/mapbox-gl-js/api/#map#addsource
+        type: "geojson",
+        data: {
+          "type": "FeatureCollection",
+          "features": []
+        }
       });
-    }
+
+      // Shows all store types as different colors on map
+      map.addLayer({ // Add a new layer to the map style: https://docs.mapbox.com/mapbox-gl-js/api/#map#addlayer
+        id: "tilequery-points",
+        type: "circle",
+        source: "tilequery", // Set the layer source
+        paint: {
+          "circle-stroke-color": "white",
+          "circle-stroke-width": { // Set the stroke width of each circle: https://docs.mapbox.com/mapbox-gl-js/style-spec/#paint-circle-circle-stroke-width
+            stops: [
+              [0, 0.1],
+              [18, 3]
+            ],
+            base: 5
+          },
+          "circle-radius": { // Set the radius of each circle, as well as its size at each zoom level: https://docs.mapbox.com/mapbox-gl-js/style-spec/#paint-circle-circle-radius
+            stops: [
+              [12, 5],
+              [22, 180]
+            ],
+            base: 5
+          },
+        }
+      });
+    });
+
+   // Adds popups for each store to show name, type , address, distance from query point
+    let popup = new mapboxgl.Popup; // Initialize a new popup
+
+  map.on('mouseenter', point, function(e) {
+     map.getCanvas().style.cursor = 'pointer'; // When the cursor enters a feature, set it to a pointer
+
+     var title = '<h3>' + e.result.properties.text + '</h3>'; // Set the store name
+     var storeAddress = '<p>' + e.result.properties.address + '</p>'; // Set the store address
+    //  var obj = JSON.parse(e.features[0].properties.tilequery); // Get the feature's tilequery object (https://docs.mapbox.com/api/maps/#response-retrieve-features-from-vector-tiles)
+    //  var distance = '<p>' + (obj.distance / 1609.344).toFixed(2) + ' mi. from location' + '</p>'; // Take the distance property, convert it to miles, and truncate it at 2 decimal places
+
+     var lon = e.result.center[0];
+     var lat = e.result.center[1];
+     var coordinates = new mapboxgl.LngLat(lon, lat); // Create a new LngLat object (https://docs.mapbox.com/mapbox-gl-js/api/#lnglatlike)
+     var content = title + storeAddress; // All the HTML elements
+
+     popup.setLngLat(coordinates) // Set the popup at the given coordinates
+       .setHTML(content) // Set the popup contents equal to the HTML elements you created
+       .addTo(map); // Add the popup to the map
+   })
+
+   map.on('mouseleave', point, function() {
+     map.getCanvas().style.cursor = ''; // Reset the cursor when it leaves the point
+     popup.remove(); // Remove the popup when the cursor leaves the point
+   });
+  }
 
   handleToggleListMap = () => {
     if (this.state.mapSearchVisible){
@@ -215,11 +225,11 @@ class TagControl extends React.Component {
       return <NewTagForm onNewTagCreation = {this.handleAddingNewTag} />
     } else if (this.props.editTagFormVisible){
       return <EditTagForm tag = { this.state.selectedTag} onEditTag = {this.handleEditingTag} />
-    } else if (this.state.selectedTag != null){
-      return <TagList 
-        onEditClick={this.handleEditingTag}
-        onDeleteClick={this.handleDeletingTag}
-      />
+    // } else if (this.state.selectedTag != null){
+    //   return <TagList 
+    //     onEditClick={this.handleEditingTag}
+    //     onDeleteClick={this.handleDeletingTag}
+    //   />
     } else {
       return <MapSearch 
         searchResults={this.makeApiSearchCall}

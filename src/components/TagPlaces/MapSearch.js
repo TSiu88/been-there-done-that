@@ -15,6 +15,7 @@ function MapSearch(props){
         <h2 className="mapHeading">Map Search</h2>
         <div id="geocoder" className="geocoder"></div>
         <div id="listings" className="listings"></div>
+        {/* <div id="listings" className="listings"><PlaceList /></div> */}
       </div>
       <div id='map' className='map pad2'>Map</div>
     </React.Fragment>
