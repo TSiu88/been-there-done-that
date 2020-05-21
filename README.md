@@ -35,15 +35,15 @@
 
 ---
 ## Table of Contents
-1. [About the Project](#about-the-project)
+1. [About the Project](#file_folderabout-the-project)
     - [Description](#bookdescription)
     - [Notable Features](#sparklesnotable-features)
     - [Known Bugs](#microbeknown-bugs)
-2. [Setup/Installation Requirements](#setup/installation-requirements)
+2. [Setup/Installation Requirements](#wrenchsetup/installation-requirements)
     - [Requirements to Run](#toolboxrequirements-to-run)
     - [Instructions](#gearinstructions)
     - [Other Technologies Used](#desktop_computerother-technologies-used)
-3. [Scope](#scope)
+3. [Project Scope](#dartproject-scope)
     - [Use Cases](#writing_handuse-cases)
     - [Minimal Viable Product](#compassminimal-viable-product)
     - [Future Product Roadmap](#world_mapfuture-product-roadmap)
@@ -56,7 +56,7 @@
 6. [Support and Contact Details](#mailboxsupport-and-contact-details)
 7. [License](#balance_scalelicense)
 ---
-## About the Project
+## :file_folder:About the Project
 
 ### :book:Description
 
@@ -86,7 +86,7 @@ This project also faced many struggles.  There is less documentation on using Re
 
 <!-- _There are currently no known bugs in this program_ -->
 
-## Setup/Installation Requirements
+## :wrench:Setup/Installation Requirements
 
 ### :toolbox:Requirements to Run
 
@@ -138,7 +138,7 @@ This project also faced many struggles.  There is less documentation on using Re
 * _D3.js for data visualization of density of tags/notes in states/counties_
 * _Calendar integration showing dates tags/notes added_
 
-## Scope
+## :dart:Project Scope
 
 ### :writing_hand:Use Cases
 Users are anyone who would like help remembering where they’ve been from world travels to local businesses.
